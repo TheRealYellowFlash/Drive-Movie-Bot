@@ -197,6 +197,7 @@ def handle_all_messages(message):
             bot.reply_to(message, text=text, parse_mode="html", disable_web_page_preview=True)
         else:
             text = make_text(all_links, 0)
+            bot.delete_message(chat_id=message.chat.id, message_id=message_ids)
             message_ids = bot.reply_to(message, text=make_text(all_links, 0), parse_mode="html", disable_web_page_preview=True, reply_markup=makeKeyboard(1, 1)).message_id
 
 def make_text(all_links, i=0):
