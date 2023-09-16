@@ -35,3 +35,4 @@ uuid==1.30
 Werkzeug==2.3.7
 wsproto==1.2.0
 youtube-dl==2021.12.17
+pymongo
