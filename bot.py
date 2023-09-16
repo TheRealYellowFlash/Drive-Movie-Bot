@@ -98,7 +98,7 @@ def start(message):
         bot.send_message(-1001975502922, text=f"#{message.chat.id}\n\nUsername : [{message.from_user.full_name}](tg://user?id={message.from_user.id})\n\nStarted for fun", parse_mode='markdown', disable_web_page_preview=True)
         button = telebot.types.InlineKeyboardButton(text="⚡ Power House ", url=f"http://t.me/GdtotLinkz")
         keyboard = telebot.types.InlineKeyboardMarkup().add(button)
-        bot.send_photo(chat_id=message.chat.id, photo=f"{random.choice(img_link)}", caption=f"Hey 👋🏻 `{str(message.chat.first_name)}`,\n\nThis 🤖 Bot is the Exclusive property of [GD Status](https://t.me/GdtotLinkz).\nIts used to Share *Gdrive* Links \n\n*⚡️powered by* @GdtotLinkz", parse_mode="markdown", reply_markup=keyboard) 
+        bot.send_photo(chat_id=message.chat.id, photo=f"{random.choice(img_link)}", caption=f"Hey 👋🏻 `{str(message.chat.first_name)}`,\n\nThis 🤖 Bot is the Exclusive property of [Ye1lowFlash](https://t.me/Ye1lowFlash).\nIts a *Movie Search bot* , You'll get Movie as a google drive link\nTry searching `avengers` .\n\n*⚡️powered by* @GdtotLinkz", parse_mode="markdown", reply_markup=keyboard) 
     else:
         bot.send_message(-1001975502922, text=f"#{message.chat.id}\n\nUsername : [{message.from_user.full_name}](tg://user?id={message.from_user.id})\n\nGot Link for `{code[0]}`", parse_mode='markdown', disable_web_page_preview=True)
         if check_member.status not in ["member", "creator", "administrator"]:
@@ -129,72 +129,75 @@ def start(message):
 
 @bot.message_handler(func=lambda message: True, content_types=['text', 'photo'])
 def handle_all_messages(message):
-    movie = message.text 
-    text = "No Links found !"
-    message_ids = bot.reply_to(message, text=f"Searching ....", parse_mode='html', disable_web_page_preview=True).message_id
-    result = links.aggregate([
-        {
-            "$search": {
-                "index": "default",
-                "text": {
-                    "query": f"{message.text}",
-                    "path": "indexTitle",
-                    "fuzzy": {},
+    movie = message.text
+    if 'http' in movie:
+        bot.reply_to(message, text=f"This is not a bypass bot its a movie search bot !!", parse_mode="html", disable_web_page_preview=True)
+    else:
+        text = "No Links found !"
+        message_ids = bot.reply_to(message, text=f"Searching ....", parse_mode='html', disable_web_page_preview=True).message_id
+        result = links.aggregate([
+            {
+                "$search": {
+                    "index": "default",
+                    "text": {
+                        "query": f"{message.text}",
+                        "path": "indexTitle",
+                        "fuzzy": {},
+                    }
+                }
+            },
+            {
+                "$project": {
+                    "title": 1,
+                    "link": 1,
+                    "size":1,
+                    "score": {'$meta': 'searchScore'}
                 }
             }
-        },
-        {
-            "$project": {
-                "title": 1,
-                "link": 1,
-                "size":1,
-                "score": {'$meta': 'searchScore'}
-            }
-        }
-    ])
-    id = 1
-    global all_links
-    all_links = []
-    data = []
-    li = list(result)
-    for i in list(li):
-        if i['score'] > 3:
-            if id >= 5:
+        ])
+        id = 1
+        global all_links
+        all_links = []
+        data = []
+        li = list(result)
+        for i in list(li):
+            if i['score'] > 3:
+                if id >= 5:
+                    data.append("<b>⚡️powered by @GdtotLinkz</b>")
+                    all_links.append(data)
+                    data = []
+                    id = 1
+                else:
+                    try:
+                        if 'appdrive' in i['link']:
+                            ec_link = f"apdYellow{encrypt(i['link'].split('/')[-1])}"
+                        elif 'gdtot' in i['link']:
+                            ec_link = f"gdtYellow{encrypt(i['link'].strip().split('/')[-1])}"
+                        elif 'gdflix' in i['link']:
+                            ec_link = f"gdfYellow{encrypt(i['link'].split('/')[-1])}"
+                        elif 'filepress' in i['link']:
+                            ec_link = f"flpYellow{encrypt(i['link'].strip().split('/')[-1])}"
+                        text = f"🎥 <b>Title</b> : <code>{i['title']}  [{i['size']}]</code>\n\n 🔗 <b>Link</b> : <a href='https://t.me/DriveMovie_bot?start={ec_link}'>Download</a>\n\n"
+                        print(ec_link)
+                        data.append(text)
+                        id += 1
+                    except Exception as e:
+                        print(e)
+                        try:
+                            print({i['link']})
+                        except:
+                            pass
+        if len(data) <= 4:
+            if len(data) != 0:
                 data.append("<b>⚡️powered by @GdtotLinkz</b>")
                 all_links.append(data)
-                data = []
-                id = 1
-            else:
-                try:
-                    if 'appdrive' in i['link']:
-                        ec_link = f"apdYellow{encrypt(i['link'].split('/')[-1])}"
-                    elif 'gdtot' in i['link']:
-                        ec_link = f"gdtYellow{encrypt(i['link'].strip().split('/')[-1])}"
-                    elif 'gdflix' in i['link']:
-                        ec_link = f"gdfYellow{encrypt(i['link'].split('/')[-1])}"
-                    elif 'filepress' in i['link']:
-                        ec_link = f"flpYellow{encrypt(i['link'].strip().split('/')[-1])}"
-                    text = f"🎥 <b>Title</b> : <code>{i['title']}  [{i['size']}]</code>\n\n 🔗 <b>Link</b> : <a href='https://t.me/DriveMovie_bot?start={ec_link}'>Download</a>\n\n"
-                    print(ec_link)
-                    data.append(text)
-                    id += 1
-                except Exception as e:
-                    print(e)
-                    try:
-                        print({i['link']})
-                    except:
-                        pass
-    if len(data) <= 4:
-        if len(data) != 0:
-            data.append("<b>⚡️powered by @GdtotLinkz</b>")
-            all_links.append(data)
 
-    if text == "No Links found !":
-        bot.delete_message(chat_id=message.chat.id, message_id=message_ids)
-        bot.reply_to(message, text=text, parse_mode="html", disable_web_page_preview=True)
-    else:
-        text = make_text(all_links, 0)
-        message_ids = bot.reply_to(message, text=make_text(all_links, 0), parse_mode="html", disable_web_page_preview=True, reply_markup=makeKeyboard(1, 1)).message_id
+        if text == "No Links found !":
+            bot.delete_message(chat_id=message.chat.id, message_id=message_ids)
+            bot.reply_to(message, text=text, parse_mode="html", disable_web_page_preview=True)
+        else:
+            text = make_text(all_links, 0)
+            message_ids = bot.reply_to(message, text=make_text(all_links, 0), parse_mode="html", disable_web_page_preview=True, reply_markup=makeKeyboard(1, 1)).message_id
 
 def make_text(all_links, i=0):
     text = ''
