@@ -451,7 +451,8 @@ def handle_all_messages(message):
                   }
                 links.insert_one(new_one)
                 id+=1
-          except:
+          except Exception as e:
+            print(e)
             print(f"{i}")
 
     else:
