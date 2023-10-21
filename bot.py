@@ -130,6 +130,23 @@ def start(message):
 @bot.message_handler(func=lambda message: True, content_types=['text', 'photo'])
 def handle_all_messages(message):
     movie = message.caption
+    headers = {
+       'authority': 'new6.gdtot.cfd',
+       'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+       'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
+       'cache-control': 'max-age=0',
+       # 'cookie': 'crypt=RGF2RC9iZmtYaHdraGRmdGxqVXFiRldkNmhpWHhBT1V6S0x3eUpWSUl2UT0%3D; PHPSESSID=ujkdkt72qm4cspl3p7ij04rpfb',
+       'referer': 'https://google.com/',
+       'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
+       'sec-ch-ua-mobile': '?0',
+       'sec-ch-ua-platform': '"Windows"',
+       'sec-fetch-dest': 'document',
+       'sec-fetch-mode': 'navigate',
+       'sec-fetch-site': 'cross-site',
+       'sec-fetch-user': '?1',
+       'upgrade-insecure-requests': '1',
+       'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
+    }
     if movie == None:
       movie = message.text
     if 'http' in movie:
