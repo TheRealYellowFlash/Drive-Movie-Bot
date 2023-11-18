@@ -91,7 +91,7 @@ img_link = ['https://i.pinimg.com/originals/2b/38/1e/2b381e29d6c14418cf104d07803
 @bot.message_handler(commands=['start']) 
 def start(message):
     code = extract_arg(message.text)
-    CHAT_ID = -1001549189591
+    CHAT_ID = -1002145126461
     USER_ID = message.from_user.id
     check_member = bot.get_chat_member(CHAT_ID, USER_ID)
     if code == []:
