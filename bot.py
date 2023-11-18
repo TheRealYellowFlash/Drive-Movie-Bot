@@ -88,6 +88,13 @@ img_link = ['https://i.pinimg.com/originals/2b/38/1e/2b381e29d6c14418cf104d07803
  'https://i.pinimg.com/originals/ef/d5/20/efd5204be4582beefabc2f59273673b7.jpg',
  'https://i.pinimg.com/originals/6b/0e/35/6b0e353d61f7f0f620cb5526561140a1.jpg']
 
+
+def gplink(link):
+  html = requests.get(f"https://gplinks.in/api?api=14babc9511f3680505742438efe33ba2c7026c43&url={link}")
+  gplink = json.loads(html.text)['shortenedUrl']
+  return gplink
+
+
 @bot.message_handler(commands=['start']) 
 def start(message):
     code = extract_arg(message.text)
@@ -123,7 +130,9 @@ def start(message):
                 link = link.replace('.pro', '.lol')
             elif 'gdflix' in link:
                 link = link.replace('.lol', '.live')
-            text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n*⚡powered by* @GdtotLinkz"
+            gplink = gplink(link)
+            # text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n*⚡powered by* @GdtotLinkz"
+            text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {gplink}\n\n*⚡powered by* @GdtotLinkz"
             bot.delete_message(chat_id=message.chat.id, message_id=message_ids)
             message_ids = bot.reply_to(message, text=text, parse_mode='markdown', disable_web_page_preview=True)
 
