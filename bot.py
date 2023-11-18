@@ -170,7 +170,7 @@ def handle_all_messages(message):
           try:
             if 'gdtot' in i:
               url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new6.gdtot.cfd/file/',i.strip())
-              url1 = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new9.gdtot.cfd/file/',i.strip())
+              url1 = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new1.gdtot.zip/file/',i.strip())
               html = requests.get(f"{url1}",headers=headers)
               soup = BeautifulSoup(html.text,'lxml')
               title = soup.title.text[8::]
@@ -238,7 +238,7 @@ def handle_all_messages(message):
 
             elif 'filepress' in i:
               headers = {
-                  'authority': 'new3.filepress.store',
+                  'authority': 'new4.filepress.store',
                   'accept': 'application/json, text/plain, */*',
                   'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
                   'if-none-match': 'W/"380-lA/yKQ3O27OC7rI3I0mcsWjKn44"',
@@ -255,7 +255,7 @@ def handle_all_messages(message):
               match = re.findall(r"\/[1-9a-zA-Z0]+$",url.strip())
               code = match[0][1::]
               if code:
-                html = requests.get(f"https://new3.filepress.store/api/file/get/{code}", headers=headers)
+                html = requests.get(f"https://new4.filepress.store/api/file/get/{code}", headers=headers)
                 soup = BeautifulSoup(html.text,'lxml')
                 jk = json.loads(html.text)
                 new_tit = jk['data']['name']
@@ -324,7 +324,7 @@ def handle_all_messages(message):
             elif 'gdflix' in i:
               data = []
               url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://gdflix.lol/file/',i.strip())
-              url1 = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://gdflix.rest/file/',i.strip())
+              url1 = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://gdflix.live/file/',i.strip())
               html = requests.get(url1.strip())
               soup = BeautifulSoup(html.text,'lxml')
               if soup.title.text != 'GDFlix | GDFlix':
@@ -565,16 +565,16 @@ def decrypt(link):
     link2 = f"{link1[::-1]}="
     newLink = base64.b64decode(link2)
     if id == 'flp':
-        realLink = f"https://filepress.click/file/{newLink.decode()}"
+        realLink = f"https://new4.filepress.store/file/{newLink.decode()}"
         return realLink
     elif id == 'gdt':
-        realLink = f"https://new6.gdtot.cfd/file/{newLink.decode()}"
+        realLink = f"https://new1.gdtot.zip/file/{newLink.decode()}"
         return realLink
     elif id == 'apd':
-        realLink = f"https://appdrive.pro/file/{newLink.decode()}"
+        realLink = f"https://appdrive.lol/file/{newLink.decode()}"
         return realLink
     elif id == 'gdf':
-        realLink = f"https://gdflix.lol/file/{newLink.decode()}"
+        realLink = f"https://gdflix.live/file/{newLink.decode()}"
         return realLink
 
 def encrypt(link):
