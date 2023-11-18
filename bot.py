@@ -116,13 +116,13 @@ def start(message):
             data = list(links.find({"link": url}))
             link = data[0]['link']
             if 'gdtot' in link:
-                link = link.replace('new6', 'new9')
+                link = link.replace('new6.gdtot.cfd', 'new1.gdtot.zip')
             elif 'filepress' in link:
-                link = link.replace('https://filepress.click', 'https://new.filepress.store')
+                link = link.replace('https://filepress.click', 'new4.filepress.store')
             elif 'appdrive' in link:
                 link = link.replace('.pro', '.lol')
             elif 'gdflix' in link:
-                link = link.replace('.lol', '.cc')
+                link = link.replace('.lol', '.live')
             text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n*⚡powered by* @GdtotLinkz"
             bot.delete_message(chat_id=message.chat.id, message_id=message_ids)
             message_ids = bot.reply_to(message, text=text, parse_mode='markdown', disable_web_page_preview=True)
@@ -565,16 +565,16 @@ def decrypt(link):
     link2 = f"{link1[::-1]}="
     newLink = base64.b64decode(link2)
     if id == 'flp':
-        realLink = f"https://new4.filepress.store/file/{newLink.decode()}"
+        realLink = f"https://filepress.click/file/{newLink.decode()}"
         return realLink
     elif id == 'gdt':
-        realLink = f"https://new1.gdtot.zip/file/{newLink.decode()}"
+        realLink = f"https://new6.gdtot.cfd/file/{newLink.decode()}"
         return realLink
     elif id == 'apd':
-        realLink = f"https://appdrive.lol/file/{newLink.decode()}"
+        realLink = f"https://appdrive.pro/file/{newLink.decode()}"
         return realLink
     elif id == 'gdf':
-        realLink = f"https://gdflix.live/file/{newLink.decode()}"
+        realLink = f"https://gdflix.lol/file/{newLink.decode()}"
         return realLink
 
 def encrypt(link):
