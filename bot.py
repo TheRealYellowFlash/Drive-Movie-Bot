@@ -325,7 +325,23 @@ def handle_all_messages(message):
               data = []
               url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://gdflix.lol/file/',i.strip())
               url1 = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://gdflix.live/file/',i.strip())
-              html = requests.get(url1.strip())
+              headers = {
+                   'authority': 'gdflix.live',
+                   'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+                   'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
+                   'cache-control': 'max-age=0',
+                   # 'cookie': 'PHPSESSID=4a76494e4a6a116e6167dcf95ac58b60',
+                   'sec-ch-ua': '"Google Chrome";v="119", "Chromium";v="119", "Not?A_Brand";v="24"',
+                   'sec-ch-ua-mobile': '?0',
+                   'sec-ch-ua-platform': '"Windows"',
+                   'sec-fetch-dest': 'document',
+                   'sec-fetch-mode': 'navigate',
+                   'sec-fetch-site': 'none',
+                   'sec-fetch-user': '?1',
+                   'upgrade-insecure-requests': '1',
+                   'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+               }
+              html = requests.get(url1.strip(),headers=headers)
               soup = BeautifulSoup(html.text,'lxml')
               if soup.title.text != 'GDFlix | GDFlix':
                 for i in soup.find_all('li',{'class':'list-group-item'}):
