@@ -102,7 +102,7 @@ def start(message):
     else:
         bot.send_message(-1001975502922, text=f"#{message.chat.id}\n\nUsername : [{message.from_user.full_name}](tg://user?id={message.from_user.id})\n\nGot Link for `{code[0]}`", parse_mode='markdown', disable_web_page_preview=True)
         if check_member.status not in ["member", "creator", "administrator"]:
-            button = telebot.types.InlineKeyboardButton(text="Join Channel 🔗", url=f"https://t.me/+a6K_qz4E6SRiODI1")
+            button = telebot.types.InlineKeyboardButton(text="Join Channel 🔗", url=f"https://t.me/+UHMom5MO8KU1MzFl")
             button1 = telebot.types.InlineKeyboardButton(text="Try again 🔄 ", url=f"https://t.me/DriveMovie_bot?start={code[0]}")
             keyboard = telebot.types.InlineKeyboardMarkup().add(button).add(button1)
             message_id1 = bot.send_message(chat_id=message.chat.id, text=f"Please *Join* My Status Channel and Try again to Get Link!", parse_mode='markdown', disable_web_page_preview=True, reply_markup=keyboard).message_id
