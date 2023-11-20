@@ -247,19 +247,18 @@ def handle_all_messages(message):
 
             elif 'filepress' in i:
               headers = {
-                  'authority': 'new4.filepress.store',
-                  'accept': 'application/json, text/plain, */*',
-                  'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
-                  'if-none-match': 'W/"380-lA/yKQ3O27OC7rI3I0mcsWjKn44"',
-                  'referer': 'https://new3.filepress.store/file/648225d30a3b9bd09dbf974a',
-                  'sec-ch-ua': '"Chromium";v="118", "Google Chrome";v="118", "Not=A?Brand";v="99"',
-                  'sec-ch-ua-mobile': '?0',
-                  'sec-ch-ua-platform': '"Windows"',
-                  'sec-fetch-dest': 'empty',
-                  'sec-fetch-mode': 'cors',
-                  'sec-fetch-site': 'same-origin',
-                  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',
-              }
+                   'authority': 'new4.filepress.store',
+                   'accept': 'application/json, text/plain, */*',
+                   'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
+                   'referer': 'https://new4.filepress.store/file/63e58d630826cf26b12edcd5',
+                   'sec-ch-ua': '"Google Chrome";v="119", "Chromium";v="119", "Not?A_Brand";v="24"',
+                   'sec-ch-ua-mobile': '?0',
+                   'sec-ch-ua-platform': '"Windows"',
+                   'sec-fetch-dest': 'empty',
+                   'sec-fetch-mode': 'cors',
+                   'sec-fetch-site': 'same-origin',
+                   'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+               }
               url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://filepress.click/file/',i.strip())
               match = re.findall(r"\/[1-9a-zA-Z0]+$",url.strip())
               code = match[0][1::]
