@@ -247,23 +247,24 @@ def handle_all_messages(message):
 
             elif 'filepress' in i:
               headers = {
-                   'authority': 'new4.filepress.store',
-                   'accept': 'application/json, text/plain, */*',
-                   'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
-                   'referer': 'https://new4.filepress.store/file/63e58d630826cf26b12edcd5',
-                   'sec-ch-ua': '"Google Chrome";v="119", "Chromium";v="119", "Not?A_Brand";v="24"',
-                   'sec-ch-ua-mobile': '?0',
-                   'sec-ch-ua-platform': '"Windows"',
-                   'sec-fetch-dest': 'empty',
-                   'sec-fetch-mode': 'cors',
-                   'sec-fetch-site': 'same-origin',
-                   'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
-               }
+                  'authority': 'new5.filepress.store',
+                  'accept': 'application/json, text/plain, */*',
+                  'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
+                  'if-none-match': 'W/"afb-SyifwmaNoYIngy+yrZH5YnZSs/s"',
+                  'referer': 'https://new5.filepress.store/file/63b6c995349115c6e78cc605',
+                  'sec-ch-ua': '"Google Chrome";v="119", "Chromium";v="119", "Not?A_Brand";v="24"',
+                  'sec-ch-ua-mobile': '?0',
+                  'sec-ch-ua-platform': '"Windows"',
+                  'sec-fetch-dest': 'empty',
+                  'sec-fetch-mode': 'cors',
+                  'sec-fetch-site': 'same-origin',
+                  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+              }
               url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://filepress.click/file/',i.strip())
               match = re.findall(r"\/[1-9a-zA-Z0]+$",url.strip())
               code = match[0][1::]
               if code:
-                html = requests.get(f"https://new4.filepress.store/api/file/get/{code}", headers=headers)
+                html = requests.get(f"https://new5.filepress.store/api/file/get/{code}", headers=headers)
                 soup = BeautifulSoup(html.text,'lxml')
                 jk = json.loads(html.text)
                 new_tit = jk['data']['name']
