@@ -18,6 +18,7 @@ from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 from googleapiclient.http import MediaFileUpload
 from oauth2client.service_account import ServiceAccountCredentials
+from httplib2 import Http
 import clone
 
 client = MongoClient("mongodb+srv://notpointbreak:Password246M@cluster0.gzxc2sc.mongodb.net/?retryWrites=true&w=majority")
@@ -503,7 +504,7 @@ def handle_all_messages(message):
                 print(f"Cloning {movie}")
                 gdrive = clone.clonev1(movie)
                 title = clone.details(movie)
-                msg = f"<b>🎥 Title</b> : <code>{title}</code>\n\n<b>🔗 Bypassed Link </b>: {gplink(gdrive)}\n\n<b>🌎 Index Link </b>: {indexLink}\n\n"
+                msg = f"<b>🎥 Title</b> : <code>{title}</code>\n\n<b>🌎 Index Link </b>: {gplink(gdrive)}\n\n"
                 bot.reply_to(message, text=f"{msg}", parse_mode="html", disable_web_page_preview=True)
              except Exception as e:
               print(e)
