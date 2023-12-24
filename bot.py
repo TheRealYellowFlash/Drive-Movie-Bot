@@ -500,8 +500,9 @@ def handle_all_messages(message):
                 links.insert_one(new_one)
                 id+=1
             elif 'drive.google' in i:
+             links = re.findall(r'https:\/\/[a-zA-Z.\/0-9\?\-_=]+',movie)
              try:
-                message_id1 = bot.send_message(chat_id=message.chat.id, text=f"Cloninf <code>{movie}</code>...", parse_mode='html', disable_web_page_preview=True).message_id
+                message_id1 = bot.send_message(chat_id=message.chat.id, text=f"Cloninf <code>{links[0]}</code>...", parse_mode='html', disable_web_page_preview=True).message_id
                 print(f"Cloning {movie}")
                 gdrive = clone.clonev1(movie)
                 title = clone.details(movie)
