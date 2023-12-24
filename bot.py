@@ -638,5 +638,30 @@ def callback_query(call):
         else:
             pass
 
+def dispose():
+     print('Starting To Delete Files')
+     folders = ['0AJtbwLEZZtnjUk9PVA']
+     scopes = ['https://www.googleapis.com/auth/drive']
+     credentials = ServiceAccountCredentials.from_json_keyfile_name(f'Accounts/{random.randint(0, 99)}.json', scopes)
+     http_auth = credentials.authorize(Http())
+     service = build('drive', 'v3', http=http_auth)
+     for folder in folders:
+         items = []
+         pageToken = ""
+         while pageToken is not None:
+             response = service.files().list(q="'" + folder + "' in parents and trashed = false", pageSize=1000, pageToken=pageToken,includeItemsFromAllDrives=True, supportsAllDrives=True, corpora="allDrives", fields="nextPageToken, files(id,name)").execute()
+             items.extend(response.get('files', []))
+             pageToken = response.get('nextPageToken')
+         if items != []:
+            for id in items:
+                body = {'trashed': True}
+                try :
+                    updated_file = service.files().update(fileId=id['id'], body=body,supportsAllDrives=True).execute()
+                    name = updated_file['name']
+                    print(f"Deleting : {name}")
+                except Exception as e:
+                    print(e)
+                    pass
+
 bot.infinity_polling(timeout=10, long_polling_timeout=5)
 
