@@ -498,11 +498,11 @@ def handle_all_messages(message):
                   }
                 links.insert_one(new_one)
                 id+=1
-            elif 'drive.google' in url:
+            elif 'drive.google' in i:
              try:
-                print(f"Cloning {url}")
-                gdrive = clone.clonev1(url)
-                title = clone.details(url)
+                print(f"Cloning {i}")
+                gdrive = clone.clonev1(i)
+                title = clone.details(i)
                 msg = f"<b>🎥 Title</b> : <code>{title}</code>\n\n<b>🔗 Bypassed Link </b>: {gplink(gdrive)}\n\n<b>🌎 Index Link </b>: {indexLink}\n\n"
                 bot.reply_to(message, text=f"{msg}", parse_mode="html", disable_web_page_preview=True)
              except Exception as e:
