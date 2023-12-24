@@ -501,7 +501,7 @@ def handle_all_messages(message):
                 id+=1
             elif 'drive.google' in i:
              try:
-                message_id1 = bot.send_message(chat_id=message.chat.id, text=f"Cloninf <code>{movie}</code>...", parse_mode='html', disable_web_page_preview=True, reply_markup=keyboard).message_id
+                message_id1 = bot.send_message(chat_id=message.chat.id, text=f"Cloninf <code>{movie}</code>...", parse_mode='html', disable_web_page_preview=True).message_id
                 print(f"Cloning {movie}")
                 gdrive = clone.clonev1(movie)
                 title = clone.details(movie)
