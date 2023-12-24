@@ -501,9 +501,11 @@ def handle_all_messages(message):
                 id+=1
             elif 'drive.google' in i:
              try:
+                message_id1 = bot.send_message(chat_id=message.chat.id, text=f"Cloninf <code>{movie}</code>...", parse_mode='html', disable_web_page_preview=True, reply_markup=keyboard).message_id
                 print(f"Cloning {movie}")
                 gdrive = clone.clonev1(movie)
                 title = clone.details(movie)
+                bot.delete_message(message.chat.id, message_id=message_id1)
                 msg = f"<b>🎥 Title</b> : <code>{title}</code>\n\n<b>🌎 Index Link </b>: {gplink(gdrive)}\n\n"
                 bot.reply_to(message, text=f"{msg}", parse_mode="html", disable_web_page_preview=True)
              except Exception as e:
