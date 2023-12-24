@@ -45,7 +45,7 @@ def details(url):
     url = url.replace('/u/0','')
     id = getid(url)
     scopes = ['https://www.googleapis.com/auth/drive']
-    credentials = ServiceAccountCredentials.from_json_keyfile_name(f'accountsv2/{random.randint(0, 99)}.json', scopes)
+    credentials = ServiceAccountCredentials.from_json_keyfile_name(f'Accounts/{random.randint(0, 99)}.json', scopes)
     http_auth = credentials.authorize(Http())
     service = build('drive', 'v3', http=http_auth)
     file = service.files().get(fileId=id,supportsAllDrives=True).execute()
