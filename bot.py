@@ -506,6 +506,7 @@ def handle_all_messages(message):
                 msg = f"<b>🎥 Title</b> : <code>{title}</code>\n\n<b>🔗 Bypassed Link </b>: {gplink(gdrive)}\n\n<b>🌎 Index Link </b>: {indexLink}\n\n"
                 bot.reply_to(message, text=f"{msg}", parse_mode="html", disable_web_page_preview=True)
              except Exception as e:
+              print(e)
               dispose()
           except Exception as e:
             print(e)
