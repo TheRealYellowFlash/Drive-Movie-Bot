@@ -143,37 +143,41 @@ def appdrive(link,id):
       'upgrade-insecure-requests': '1',
       'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
       }
+    try:
+      html = requests.get(f"https://www.imdb.com/find/?q={new_title.replace('Copy of ','')}&ref_=nv_sr_sm",headers=headers)
+      soup1 = BeautifulSoup(html.text,'lxml')
+      print(f"{id} : {url} : {new_title} : {soup1.find('a',{'class':'ipc-metadata-list-summary-item__t'})['href'][7:-17]}")
+      bot.reply_to(message, text=f"Added {url1} to DB , thank you !!", parse_mode="html", disable_web_page_preview=True)
+    except:
       try:
-        html = requests.get(f"https://www.imdb.com/find/?q={new_title.replace('Copy of ','')}&ref_=nv_sr_sm",headers=headers)
+        html = requests.get(f"https://www.imdb.com/find/?q={new_title.split(' ')[0]}&ref_=nv_sr_sm",headers=headers)
         soup1 = BeautifulSoup(html.text,'lxml')
         print(f"{id} : {url} : {new_title} : {soup1.find('a',{'class':'ipc-metadata-list-summary-item__t'})['href'][7:-17]}")
+        bot.reply_to(message, text=f"Added {url1} to DB , thank you !!", parse_mode="html", disable_web_page_preview=True)
       except:
-        try:
-          html = requests.get(f"https://www.imdb.com/find/?q={new_title.split(' ')[0]}&ref_=nv_sr_sm",headers=headers)
-          soup1 = BeautifulSoup(html.text,'lxml')
-          print(f"{id} : {url} : {new_title} : {soup1.find('a',{'class':'ipc-metadata-list-summary-item__t'})['href'][7:-17]}")
-        except:
-          print(f"{id} : {url} : {new_title} : Nil")
-      try:
-        new_one = {
-        "id":f"{id}",
-        "title":f"{title}",
-        "imdbId":f"{soup1.find('a',{'class':'ipc-metadata-list-summary-item__t'})['href'][7:-17]}",
-        "link":f"{url}",
-        "size": f"{size}",
-        "indexTitle":f"{new_title}"
-        }
-      except:
-        new_one = {
-        "id":f"{id}",
-        "title":f"{title}",
-        "imdbId":f"Nil",
-        "link":f"{url}",
-        "size": f"{size}",
-        "indexTitle":f"{new_title}"
-        }
-      links.insert_one(new_one)
-     
+        print(f"{id} : {url} : {new_title} : Nil")
+        bot.reply_to(message, text=f"Added {url1} to DB , thank you !!", parse_mode="html", disable_web_page_preview=True)
+    try:
+      new_one = {
+      "id":f"{id}",
+      "title":f"{title}",
+      "imdbId":f"{soup1.find('a',{'class':'ipc-metadata-list-summary-item__t'})['href'][7:-17]}",
+      "link":f"{url}",
+      "size": f"{size}",
+      "indexTitle":f"{new_title}"
+      }
+    except:
+      new_one = {
+      "id":f"{id}",
+      "title":f"{title}",
+      "imdbId":f"Nil",
+      "link":f"{url}",
+      "size": f"{size}",
+      "indexTitle":f"{new_title}"
+      }
+    links.insert_one(new_one)
+    id+=1
+
 
 @bot.message_handler(commands=['start']) 
 def start(message):
