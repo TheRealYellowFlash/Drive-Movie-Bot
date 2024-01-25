@@ -207,13 +207,13 @@ def start(message):
             data = list(links.find({"link": url}))
             link = data[0]['link']
             if 'gdtot' in link:
-                link = link.replace('new6.gdtot.cfd', 'new1.gdtot.zip')
+                link = link.replace('new6.gdtot.cfd', 'new2.gdtot.zip')
             elif 'filepress' in link:
-                link = link.replace('https://filepress.click', 'new4.filepress.store')
+                link = link.replace('https://filepress.click', 'new7.filepress.store')
             elif 'appdrive' in link:
                 link = link.replace('.pro', '.lol')
             elif 'gdflix' in link:
-                link = link.replace('.lol', '.live')
+                link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new.gdflix.ink/file/',link)
             link = gplink(link)
             text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n*⚡powered by* @GdtotLinkz"
             # text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {gplink}\n\n*⚡powered by* @GdtotLinkz"
