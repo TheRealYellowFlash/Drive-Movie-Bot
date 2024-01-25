@@ -332,18 +332,16 @@ def handle_all_messages(message):
             elif 'filepress' in i:
               headers = {
                   'authority': 'new8.filepress.store',
-                  'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+                  'accept': 'application/json, text/plain, */*',
                   'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
-                  'cache-control': 'max-age=0',
-                  'if-modified-since': 'Tue, 02 Jan 2024 01:31:35 GMT',
+                  'if-none-match': 'W/"5f1-Wmv+qctkgT+6TYz5pZ7P5EzQ3b0"',
+                  'referer': 'https://new8.filepress.store/file/65b2ade3869e1f441ca95579',
                   'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
                   'sec-ch-ua-mobile': '?0',
                   'sec-ch-ua-platform': '"Windows"',
-                  'sec-fetch-dest': 'document',
-                  'sec-fetch-mode': 'navigate',
+                  'sec-fetch-dest': 'empty',
+                  'sec-fetch-mode': 'cors',
                   'sec-fetch-site': 'same-origin',
-                  'sec-fetch-user': '?1',
-                  'upgrade-insecure-requests': '1',
                   'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
               }
               url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://filepress.click/file/',i.strip())
