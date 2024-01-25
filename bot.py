@@ -381,8 +381,8 @@ def handle_all_messages(message):
                   "maxTimeout": 60000
                 }
                 response = requests.post('https://flsolver-67437cc15449.herokuapp.com/v1', headers={'Content-Type': 'application/json'}, json=post_body)
-                data = json.loads(response.text)
-                soup = BeautifulSoup(data['solution']['response'],'lxml')
+                fsdata = json.loads(response.text)
+                soup = BeautifulSoup(fsdata['solution']['response'],'lxml')
                 if soup.title.text != 'GDFlix | GDFlix':
                   for i in soup.find_all('li',{'class':'list-group-item'}):
                     data.append(i.text)
