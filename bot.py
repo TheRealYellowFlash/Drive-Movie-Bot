@@ -100,7 +100,7 @@ def gplink(link):
   link = json.loads(html.text)['shortenedUrl']
   return link
 
-def appdrive(link,id):
+def appdrive(link,id,message):
   data = []
   url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://appdrive.pro/file/',link.strip())
   url1 = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://appdrive.lol/file/',link.strip())
