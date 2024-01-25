@@ -511,7 +511,7 @@ def handle_all_messages(message):
                 bot.reply_to(message, text=f"{msg}", parse_mode="html", disable_web_page_preview=True)
              except Exception as e:
               print(e)
-              dispose()
+              # dispose()
           except Exception as e:
             print(e)
             print(f"{i}")
