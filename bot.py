@@ -96,8 +96,8 @@ img_link = ['https://i.pinimg.com/originals/2b/38/1e/2b381e29d6c14418cf104d07803
 
 
 def gplink(link):
-  html = requests.get(f"https://gplinks.in/api?api=14babc9511f3680505742438efe33ba2c7026c43&url={link}")
-  link = json.loads(html.text)['shortenedUrl']
+  # html = requests.get(f"https://gplinks.in/api?api=14babc9511f3680505742438efe33ba2c7026c43&url={link}")
+  # link = json.loads(html.text)['shortenedUrl']
   return link
 
 def appdrive(link,id,message):
