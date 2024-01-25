@@ -358,70 +358,95 @@ def handle_all_messages(message):
               }
               html = requests.get(url1.strip(),headers=headers)
               soup = BeautifulSoup(html.text,'lxml')
-              if soup.title.text != 'GDFlix | GDFlix':
-                for i in soup.find_all('li',{'class':'list-group-item'}):
-                  data.append(i.text)
-                title = data[0][7::]
-                size = data[2][7::]
-                try:
-                    m = re.split(r".[1-90]{4}",title)
-                    n = re.search(r"[1-90]{4}",title)
-                    k = re.sub("\.", " ", m[0])
-                    new_title = f"{k} {n.group(0)}"
-                except:
-                    m = re.split(r".[1-90]{3}",title)
-                    k = re.sub("\.", " ", m[0])
-                    new_title = f"{k}"
-                headers = {
-                'authority': 'www.imdb.com',
-                'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-                'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
-                'cache-control': 'max-age=0',
-                # 'cookie': 'session-id=137-1418442-7241252; session-id-time=2082787201l; ubid-main=132-4293222-1837241; uu=eyJpZCI6InV1YTVkMDM5Y2MyMmQyNDhiM2E2MjgiLCJwcmVmZXJlbmNlcyI6eyJmaW5kX2luY2x1ZGVfYWR1bHQiOmZhbHNlfX0=; session-token=XzBAGk2vd+ifdVA/sBvqo/8kPhLpAWkmAPr/2qUxoPii0cH2NAkCJ7RDHhHk0r8HTOiVmFA5td05R5jQGq1b6MbU8EeFosJ3bqCRSxGUdhGDluU7nZsQ53wmI5p4anJMnc/2om9uoZAFY/P2OQYgQFDNl4TaebDeMmSIN48mXo9ATJKjw1Gn0EKerQX+GXNB/XcLv8hroidvbLDdav8Xpw==; csm-hit=tb:P6R3VZ1QCD3ZJ1K0B0BR+s-T20E02TGW8B7GQ8ZQ4W5|1678378591458&t:1678378591461&adb:adblk_no',
-                'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
-                'sec-ch-ua-mobile': '?0',
-                'sec-ch-ua-platform': '"Windows"',
-                'sec-fetch-dest': 'document',
-                'sec-fetch-mode': 'navigate',
-                'sec-fetch-site': 'none',
-                'sec-fetch-user': '?1',
-                'upgrade-insecure-requests': '1',
-                'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
+              try:
+                if soup.title.text != 'GDFlix | GDFlix':
+                  for i in soup.find_all('li',{'class':'list-group-item'}):
+                    data.append(i.text)
+                  title = data[0][7::]
+                  size = data[2][7::]
+                  try:
+                      m = re.split(r".[1-90]{4}",title)
+                      n = re.search(r"[1-90]{4}",title)
+                      k = re.sub("\.", " ", m[0])
+                      new_title = f"{k} {n.group(0)}"
+                  except:
+                      m = re.split(r".[1-90]{3}",title)
+                      k = re.sub("\.", " ", m[0])
+                      new_title = f"{k}"
+              except Exception as e:
+                print(e)
+                post_body = {
+                  "cmd": "request.get",
+                  "url":f"{url1}",
+                  "maxTimeout": 60000
                 }
+                response = requests.post('https://flsolver-67437cc15449.herokuapp.com/v1', headers={'Content-Type': 'application/json'}, json=post_body)
+                data = json.loads(response.text)
+                soup = BeautifulSoup(data['solution']['response'],'lxml')
+                if soup.title.text != 'GDFlix | GDFlix':
+                  for i in soup.find_all('li',{'class':'list-group-item'}):
+                    data.append(i.text)
+                  title = data[0][7::]
+                  size = data[2][7::]
+                  try:
+                      m = re.split(r".[1-90]{4}",title)
+                      n = re.search(r"[1-90]{4}",title)
+                      k = re.sub("\.", " ", m[0])
+                      new_title = f"{k} {n.group(0)}"
+                  except:
+                      m = re.split(r".[1-90]{3}",title)
+                      k = re.sub("\.", " ", m[0])
+                      new_title = f"{k}"
+              headers = {
+              'authority': 'www.imdb.com',
+              'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+              'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
+              'cache-control': 'max-age=0',
+              # 'cookie': 'session-id=137-1418442-7241252; session-id-time=2082787201l; ubid-main=132-4293222-1837241; uu=eyJpZCI6InV1YTVkMDM5Y2MyMmQyNDhiM2E2MjgiLCJwcmVmZXJlbmNlcyI6eyJmaW5kX2luY2x1ZGVfYWR1bHQiOmZhbHNlfX0=; session-token=XzBAGk2vd+ifdVA/sBvqo/8kPhLpAWkmAPr/2qUxoPii0cH2NAkCJ7RDHhHk0r8HTOiVmFA5td05R5jQGq1b6MbU8EeFosJ3bqCRSxGUdhGDluU7nZsQ53wmI5p4anJMnc/2om9uoZAFY/P2OQYgQFDNl4TaebDeMmSIN48mXo9ATJKjw1Gn0EKerQX+GXNB/XcLv8hroidvbLDdav8Xpw==; csm-hit=tb:P6R3VZ1QCD3ZJ1K0B0BR+s-T20E02TGW8B7GQ8ZQ4W5|1678378591458&t:1678378591461&adb:adblk_no',
+              'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
+              'sec-ch-ua-mobile': '?0',
+              'sec-ch-ua-platform': '"Windows"',
+              'sec-fetch-dest': 'document',
+              'sec-fetch-mode': 'navigate',
+              'sec-fetch-site': 'none',
+              'sec-fetch-user': '?1',
+              'upgrade-insecure-requests': '1',
+              'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
+              }
+              try:
+                html = requests.get(f"https://www.imdb.com/find/?q={new_title.replace('Copy of ','')}&ref_=nv_sr_sm",headers=headers)
+                soup1 = BeautifulSoup(html.text,'lxml')
+                print(f"{id} : {url} : {new_title} : {soup1.find('a',{'class':'ipc-metadata-list-summary-item__t'})['href'][7:-17]}")
+                bot.reply_to(message, text=f"Added {url1} to DB , thank you !!", parse_mode="html", disable_web_page_preview=True)
+              except:
                 try:
-                  html = requests.get(f"https://www.imdb.com/find/?q={new_title.replace('Copy of ','')}&ref_=nv_sr_sm",headers=headers)
+                  html = requests.get(f"https://www.imdb.com/find/?q={new_title.split(' ')[0]}&ref_=nv_sr_sm",headers=headers)
                   soup1 = BeautifulSoup(html.text,'lxml')
                   print(f"{id} : {url} : {new_title} : {soup1.find('a',{'class':'ipc-metadata-list-summary-item__t'})['href'][7:-17]}")
                   bot.reply_to(message, text=f"Added {url1} to DB , thank you !!", parse_mode="html", disable_web_page_preview=True)
                 except:
-                  try:
-                    html = requests.get(f"https://www.imdb.com/find/?q={new_title.split(' ')[0]}&ref_=nv_sr_sm",headers=headers)
-                    soup1 = BeautifulSoup(html.text,'lxml')
-                    print(f"{id} : {url} : {new_title} : {soup1.find('a',{'class':'ipc-metadata-list-summary-item__t'})['href'][7:-17]}")
-                    bot.reply_to(message, text=f"Added {url1} to DB , thank you !!", parse_mode="html", disable_web_page_preview=True)
-                  except:
-                    print(f"{id} : {url} : {new_title} : Nil")
-                    bot.reply_to(message, text=f"Added {url1} to DB , thank you !!", parse_mode="html", disable_web_page_preview=True)
-                try:
-                  new_one = {
-                  "id":f"{id}",
-                  "title":f"{title}",
-                  "imdbId":f"{soup1.find('a',{'class':'ipc-metadata-list-summary-item__t'})['href'][7:-17]}",
-                  "link":f"{url}",
-                  "size": f"{size}",
-                  "indexTitle":f"{new_title}"
-                  }
-                except:
-                  new_one = {
-                  "id":f"{id}",
-                  "title":f"{title}",
-                  "imdbId":f"Nil",
-                  "link":f"{url}",
-                  "size": f"{size}",
-                  "indexTitle":f"{new_title}"
-                  }
-                links.insert_one(new_one)
-                id+=1
+                  print(f"{id} : {url} : {new_title} : Nil")
+                  bot.reply_to(message, text=f"Added {url1} to DB , thank you !!", parse_mode="html", disable_web_page_preview=True)
+              try:
+                new_one = {
+                "id":f"{id}",
+                "title":f"{title}",
+                "imdbId":f"{soup1.find('a',{'class':'ipc-metadata-list-summary-item__t'})['href'][7:-17]}",
+                "link":f"{url}",
+                "size": f"{size}",
+                "indexTitle":f"{new_title}"
+                }
+              except:
+                new_one = {
+                "id":f"{id}",
+                "title":f"{title}",
+                "imdbId":f"Nil",
+                "link":f"{url}",
+                "size": f"{size}",
+                "indexTitle":f"{new_title}"
+                }
+              links.insert_one(new_one)
+              id+=1
             elif 'appdrive' in i:
               data = []
               url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://appdrive.pro/file/',i.strip())
@@ -677,4 +702,3 @@ def dispose():
                     pass
 
 bot.infinity_polling(timeout=10, long_polling_timeout=5)
-
