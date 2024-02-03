@@ -753,6 +753,8 @@ def handle_all_messages(message):
                             ec_link = f"gdfYellow{encrypt(i['link'].split('/')[-1])}"
                         elif 'filepress' in i['link']:
                             ec_link = f"flpYellow{encrypt(i['link'].strip().split('/')[-1])}"
+                        elif 'gofile' in i['link']:
+                            ec_link = f"goYellow{encrypt(i['link'].strip().split('/')[-1])}"
                         text = f"🎥 <b>Title</b> : <code>{i['title']}  [{i['size']}]</code>\n\n 🔗 <b>Link</b> : <a href='https://t.me/DriveMovie_bot?start={ec_link}'>Download</a>\n\n"
                         print(ec_link)
                         data.append(text)
@@ -811,6 +813,9 @@ def decrypt(link):
         return realLink
     elif id == 'gdf':
         realLink = f"https://gdflix.lol/file/{newLink.decode()}"
+        return realLink
+    elif id == 'gof:
+        realLink = f"https://gofile.io/d/{newLink.decode()}"
         return realLink
 
 def encrypt(link):
