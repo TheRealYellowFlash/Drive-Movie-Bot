@@ -259,6 +259,8 @@ def handle_all_messages(message):
             link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://appdrive.pro/file/',link.strip())
         elif 'gdflix' in link:
             link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://gdflix.lol/file/',link.strip())
+        elif 'gofile' in link:
+            link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/d\/','https://gofile.io/d/',link.strip())
         data = list(links.find({"link": link}))
         if data:
           print(data)
