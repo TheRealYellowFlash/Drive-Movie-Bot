@@ -214,6 +214,8 @@ def start(message):
                 link = link.replace('.pro', '.lol')
             elif 'gdflix' in link:
                 link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new.gdflix.ink/file/',link)
+            elif 'gofile' in link:
+                link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/d\/','https://gofile.io/d/',link)
             link = gplink(link)
             text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n*⚡powered by* @GdtotLinkz"
             # text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {gplink}\n\n*⚡powered by* @GdtotLinkz"
