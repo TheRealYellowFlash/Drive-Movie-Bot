@@ -814,7 +814,7 @@ def decrypt(link):
     elif id == 'gdf':
         realLink = f"https://gdflix.lol/file/{newLink.decode()}"
         return realLink
-    elif id == 'gof:
+    elif id == 'go':
         realLink = f"https://gofile.io/d/{newLink.decode()}"
         return realLink
 
