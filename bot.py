@@ -204,6 +204,7 @@ def start(message):
                 pass
             message_ids = bot.reply_to(message, text=f"𝐆𝐞𝐧𝐞𝐫𝐚𝐭𝐢𝐧𝐠 𝐋𝐢𝐧𝐤 🔄", parse_mode='markdown', disable_web_page_preview=True).message_id
             url = decrypt(code[0])
+            print(url)
             data = list(links.find({"link": url}))
             print(data)
             link = data[0]['link']
