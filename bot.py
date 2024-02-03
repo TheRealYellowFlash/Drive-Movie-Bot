@@ -658,16 +658,16 @@ def handle_all_messages(message):
                   html = requests.get(f"https://www.imdb.com/find/?q={new_title.replace('Copy of ','')}&ref_=nv_sr_sm",headers=headers)
                   soup1 = BeautifulSoup(html.text,'lxml')
                   print(f"{id} : {url} : {new_title} : {soup1.find('a',{'class':'ipc-metadata-list-summary-item__t'})['href'][7:-17]}")
-                  bot.reply_to(message, text=f"Added {url1} to DB , thank you !!", parse_mode="html", disable_web_page_preview=True)
+                  bot.reply_to(message, text=f"Added {url} to DB , thank you !!", parse_mode="html", disable_web_page_preview=True)
                 except:
                   try:
                     html = requests.get(f"https://www.imdb.com/find/?q={new_title.split(' ')[0]}&ref_=nv_sr_sm",headers=headers)
                     soup1 = BeautifulSoup(html.text,'lxml')
                     print(f"{id} : {url} : {new_title} : {soup1.find('a',{'class':'ipc-metadata-list-summary-item__t'})['href'][7:-17]}")
-                    bot.reply_to(message, text=f"Added {url1} to DB , thank you !!", parse_mode="html", disable_web_page_preview=True)
+                    bot.reply_to(message, text=f"Added {url} to DB , thank you !!", parse_mode="html", disable_web_page_preview=True)
                   except:
                     print(f"{id} : {url} : {new_title} : Nil")
-                    bot.reply_to(message, text=f"Added {url1} to DB , thank you !!", parse_mode="html", disable_web_page_preview=True)
+                    bot.reply_to(message, text=f"Added {url} to DB , thank you !!", parse_mode="html", disable_web_page_preview=True)
                 try:
                   new_one = {
                   "id":f"{id}",
