@@ -627,7 +627,7 @@ def handle_all_messages(message):
 
                 params = {
                     'contentId': f'{contentID}',
-                    'token': 'BK1zSBHO8heXZ2rlHSML6riFUxjYFn96',
+                    'token': 'p1GiBOEVk4VQKJdXjbS5PcZh6vmR5uWg',
                     'wt': '4fd6sg89d7s6',
                 }
 
