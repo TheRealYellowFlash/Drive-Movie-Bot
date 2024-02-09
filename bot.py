@@ -209,9 +209,9 @@ def start(message):
             print(data)
             link = data[0]['link']
             if 'gdtot' in link:
-                link = link.replace('new6.gdtot.cfd', 'new2.gdtot.zip')
+                link = link.replace('new6.gdtot.cfd', 'new.gdtot.dad')
             elif 'filepress' in link:
-                link = link.replace('https://filepress.click', 'new7.filepress.store')
+                link = link.replace('https://filepress.click', 'new8.filepress.store')
             elif 'appdrive' in link:
                 link = link.replace('.pro', '.lol')
             elif 'gdflix' in link:
@@ -229,21 +229,21 @@ def start(message):
 def handle_all_messages(message):
     movie = message.caption
     headers = {
-       'authority': 'new6.gdtot.cfd',
-       'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-       'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
-       'cache-control': 'max-age=0',
-       # 'cookie': 'crypt=RGF2RC9iZmtYaHdraGRmdGxqVXFiRldkNmhpWHhBT1V6S0x3eUpWSUl2UT0%3D; PHPSESSID=ujkdkt72qm4cspl3p7ij04rpfb',
-       'referer': 'https://google.com/',
-       'sec-ch-ua': '"Chromium";v="110", "Not A(Brand";v="24", "Google Chrome";v="110"',
-       'sec-ch-ua-mobile': '?0',
-       'sec-ch-ua-platform': '"Windows"',
-       'sec-fetch-dest': 'document',
-       'sec-fetch-mode': 'navigate',
-       'sec-fetch-site': 'cross-site',
-       'sec-fetch-user': '?1',
-       'upgrade-insecure-requests': '1',
-       'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
+        'authority': 'new.gdtot.dad',
+        'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+        'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
+        'cache-control': 'max-age=0',
+        # 'cookie': 'PHPSESSID=0o1lcgl5du9ls9nfglf1mvfv7t',
+        'referer': 'http://127.0.0.1:5000/',
+        'sec-ch-ua': '"Not A(Brand";v="99", "Google Chrome";v="121", "Chromium";v="121"',
+        'sec-ch-ua-mobile': '?0',
+        'sec-ch-ua-platform': '"Windows"',
+        'sec-fetch-dest': 'document',
+        'sec-fetch-mode': 'navigate',
+        'sec-fetch-site': 'cross-site',
+        'sec-fetch-user': '?1',
+        'upgrade-insecure-requests': '1',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36',
     }
     if movie == None:
       movie = message.text
@@ -270,7 +270,7 @@ def handle_all_messages(message):
           try:
             if 'gdtot' in i:
               url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new6.gdtot.cfd/file/',i.strip())
-              url1 = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new2.gdtot.zip/file/',i.strip())
+              url1 = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new.gdtot.dad/file/',i.strip())
               html = requests.get(f"{url1}",headers=headers)
               soup = BeautifulSoup(html.text,'lxml')
               title = soup.title.text[8::]
