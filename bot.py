@@ -215,7 +215,7 @@ def start(message):
             elif 'appdrive' in link:
                 link = link.replace('.pro', '.lol')
             elif 'gdflix' in link:
-                link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new.gdflix.ink/file/',link)
+                link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new.gdflix.cfd/file/',link)
             elif 'gofile' in link:
                 link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/d\/','https://gofile.io/d/',link)
             print(link)
@@ -424,7 +424,7 @@ def handle_all_messages(message):
             elif 'gdflix' in i:
               data = []
               url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://gdflix.lol/file/',i.strip())
-              url1 = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new.gdflix.ink/file/',i.strip())
+              url1 = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new.gdflix.cfd/file/',i.strip())
               headers = {
                   'authority': 'nerd.gdflix.ink',
                   'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
