@@ -103,7 +103,7 @@ def gplink(link):
 def appdrive(link,id,message):
   data = []
   url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://appdrive.pro/file/',link.strip())
-  url1 = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://appdrive.lol/file/',link.strip())
+  url1 = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://appdrive.cloud/file/',link.strip())
   html = requests.get(url1.strip())
   soup = BeautifulSoup(html.text,'lxml')
   if soup.title.text != 'AppDrive':
@@ -535,7 +535,7 @@ def handle_all_messages(message):
             elif 'appdrive' in i:
               data = []
               url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://appdrive.pro/file/',i.strip())
-              url1 = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://appdrive.lol/file/',i.strip())
+              url1 = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://appdrive.cloud/file/',i.strip())
               html = requests.get(url1.strip())
               soup = BeautifulSoup(html.text,'lxml')
               if soup.title.text != 'AppDrive':
