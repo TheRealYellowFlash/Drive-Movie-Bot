@@ -338,7 +338,7 @@ def handle_all_messages(message):
 
             elif 'filepress' in i:
               headers = {
-                  'authority': 'new8.filepress.store',
+                  'authority': 'new10.filepress.store',
                   'accept': 'application/json, text/plain, */*',
                   'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
                   'if-none-match': 'W/"5f1-Wmv+qctkgT+6TYz5pZ7P5EzQ3b0"',
@@ -355,7 +355,7 @@ def handle_all_messages(message):
               match = re.findall(r"\/[1-9a-zA-Z0]+$",url.strip())
               code = match[0][1::]
               if code:
-                html = requests.get(f"https://new8.filepress.store/api/file/get/{code}", headers=headers)
+                html = requests.get(f"https://new10.filepress.store/api/file/get/{code}", headers=headers)
                 soup = BeautifulSoup(html.text,'lxml')
                 jk = json.loads(html.text)
                 new_tit = jk['data']['name']
@@ -465,7 +465,7 @@ def handle_all_messages(message):
                   "url":f"{url1}",
                   "maxTimeout": 60000
                 }
-                response = requests.post('https://flsolver-67437cc15449.herokuapp.com/v1', headers={'Content-Type': 'application/json'}, json=post_body)
+                response = requests.post('https://flaresolverrr45-cd010c722fa5.herokuapp.com/v1', headers={'Content-Type': 'application/json'}, json=post_body)
                 fsdata = json.loads(response.text)
                 soup = BeautifulSoup(fsdata['solution']['response'],'lxml')
                 if soup.title.text != 'GDFlix | GDFlix':
