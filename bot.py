@@ -243,8 +243,8 @@ def shundi(message):
  stat = response.json()
  print(stat)
  bot.reply_to(message, text=stat, parse_mode="html", disable_web_page_preview=True)
- bot.send_message(chat_id=message.chat.id, text=response.text, parse_mode='markdown', disable_web_page_preview=True, reply_markup=keyboard)
- bot.send_message(chat_id=message.chat.id, text=BeautifulSoup(response.text,'lxml'), parse_mode='markdown', disable_web_page_preview=True, reply_markup=keyboard)
+ bot.send_message(chat_id=message.chat.id, text=response.text, parse_mode='markdown', disable_web_page_preview=True)
+ bot.send_message(chat_id=message.chat.id, text=BeautifulSoup(response.text,'lxml'), parse_mode='markdown', disable_web_page_preview=True)
  
 @bot.message_handler(func=lambda message: True, content_types=['text', 'photo'])
 def handle_all_messages(message):
