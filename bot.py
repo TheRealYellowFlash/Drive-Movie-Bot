@@ -20,6 +20,9 @@ from googleapiclient.http import MediaFileUpload
 from oauth2client.service_account import ServiceAccountCredentials
 from httplib2 import Http
 import clone
+from datetime import date
+
+
 
 client = MongoClient("mongodb+srv://notpointbreak:Password246M@cluster0.gzxc2sc.mongodb.net/?retryWrites=true&w=majority")
 db = client.get_database('bifrost')
@@ -228,8 +231,8 @@ def start(message):
 @bot.message_handler(commands=['shundi']) 
 def shundi(message):
  url = "https://api3.adsterratools.com/publisher/stats.json"
- 
- querystring = {"start_date":"2022-03-06","finish_date":"2022-03-06","group_by":"date"}
+ today = date.today()
+ querystring = {"start_date":"2024-03-27","finish_date":f"{today}","group_by":"date"}
  
  headers = {
      "Accept": "application/json",
