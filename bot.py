@@ -225,6 +225,21 @@ def start(message):
             bot.delete_message(chat_id=message.chat.id, message_id=message_ids)
             message_ids = bot.reply_to(message, text=text, parse_mode='markdown', disable_web_page_preview=True)
 
+@bot.message_handler(commands=['shundi']) 
+def shundi(message):
+ url = "https://api3.adsterratools.com/publisher/stats.json"
+ 
+ querystring = {"start_date":"2022-03-06","finish_date":"2022-03-06","group_by":"date"}
+ 
+ headers = {
+     "Accept": "application/json",
+     "X-API-Key": "29a28d2905fa22942d03d027b42d0e13"
+ }
+ 
+ response = requests.get(url, headers=headers, params=querystring)
+ print(response.json())
+ bot.reply_to(message, text=response.json(), parse_mode="html", disable_web_page_preview=True)
+ 
 @bot.message_handler(func=lambda message: True, content_types=['text', 'photo'])
 def handle_all_messages(message):
     movie = message.caption
