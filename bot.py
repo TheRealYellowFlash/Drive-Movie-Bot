@@ -241,7 +241,7 @@ def shundi(message):
  
  response = requests.get(url, headers=headers, params=querystring)
  stat = response.json()
- peint(stat)
+ print(stat)
  bot.reply_to(message, text=stat, parse_mode="html", disable_web_page_preview=True)
  
 @bot.message_handler(func=lambda message: True, content_types=['text', 'photo'])
