@@ -361,18 +361,14 @@ def handle_all_messages(message):
 
             elif 'filepress' in i:
               headers = {
-                  'authority': 'new10.filepress.store',
                   'accept': 'application/json, text/plain, */*',
                   'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
-                  'if-none-match': 'W/"5f1-Wmv+qctkgT+6TYz5pZ7P5EzQ3b0"',
-                  'referer': 'https://new8.filepress.store/file/65b2ade3869e1f441ca95579',
-                  'sec-ch-ua': '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
-                  'sec-ch-ua-mobile': '?0',
-                  'sec-ch-ua-platform': '"Windows"',
+                  'if-none-match': 'W/"5fe-TpEueCpcvygSM+oou677s7vn0VI"',
+                  'referer': 'https://new11.filepress.store/file/65b2ade3869e1f441ca95579',
                   'sec-fetch-dest': 'empty',
                   'sec-fetch-mode': 'cors',
                   'sec-fetch-site': 'same-origin',
-                  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+                  'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
               }
               url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://filepress.click/file/',i.strip())
               match = re.findall(r"\/[1-9a-zA-Z0]+$",url.strip())
