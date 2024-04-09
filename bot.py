@@ -378,7 +378,7 @@ def handle_all_messages(message):
               match = re.findall(r"\/[1-9a-zA-Z0]+$",url.strip())
               code = match[0][1::]
               if code:
-                html = requests.get(f"https://new10.filepress.store/api/file/get/{code}", headers=headers)
+                html = requests.get(f"https://new11.filepress.store/api/file/get/{code}", headers=headers)
                 soup = BeautifulSoup(html.text,'lxml')
                 jk = json.loads(html.text)
                 new_tit = jk['data']['name']
