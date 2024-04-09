@@ -226,7 +226,9 @@ def start(message):
             text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n*⚡powered by* @GdtotLinkz"
             # text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {gplink}\n\n*⚡powered by* @GdtotLinkz"
             bot.delete_message(chat_id=message.chat.id, message_id=message_ids)
-            message_ids = bot.reply_to(message, text=text, parse_mode='markdown', disable_web_page_preview=True)
+            button1 = telebot.types.InlineKeyboardButton(text=f"Fast Dowload", url='https://kissoffering.com/mepkn451mp?key=96241a0bb106d80c3ee014fbea12a4b1')
+            keyboard = telebot.types.InlineKeyboardMarkup().add(button1)
+            message_ids = bot.reply_to(message, text=text, parse_mode='markdown', disable_web_page_preview=True,reply_markup=keyboard)
 
 @bot.message_handler(commands=['shundi']) 
 def shundi(message):
