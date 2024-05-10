@@ -490,7 +490,7 @@ def handle_all_messages(message):
                   "url":f"{url1}",
                   "maxTimeout": 60000
                 }
-                response = requests.post('https://flaresolverr-059375af3dd1.herokuapp.com/v1', headers={'Content-Type': 'application/json'}, json=post_body)
+                response = requests.post('https://flr-65c636259ed4.herokuapp.com/v1', headers={'Content-Type': 'application/json'}, json=post_body)
                 fsdata = json.loads(response.text)
                 soup = BeautifulSoup(fsdata['solution']['response'],'lxml')
                 if soup.title.text != 'GDFlix | GDFlix':
