@@ -664,8 +664,8 @@ def handle_all_messages(message):
                 }
 
                 response = requests.get(f"https://api.gofile.io/contents/{contentID}", params=params, headers=headers)
-                title = response.json()['data']['contents'][f"{list(response.json()['data']['contents'].keys())[0]}"]['name']
-                size = humanize.naturalsize(int(response.json()['data']['contents'][f"{list(response.json()['data']['contents'].keys())[0]}"]['size']))
+                title = response.json()['data']['children'][f"{list(response.json()['data']['children'].keys())[0]}"]['name']
+                size = humanize.naturalsize(int(response.json()['data']['children'][f"{list(response.json()['data']['children'].keys())[0]}"]['size']))
                 print(title)
                 print(size)
                 try:
