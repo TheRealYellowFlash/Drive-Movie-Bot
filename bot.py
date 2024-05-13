@@ -362,13 +362,17 @@ def handle_all_messages(message):
             elif 'filepress' in i:
               headers = {
                   'accept': 'application/json, text/plain, */*',
-                  'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
+                  'accept-language': 'en-US,en;q=0.9',
                   'if-none-match': 'W/"5fe-TpEueCpcvygSM+oou677s7vn0VI"',
-                  'referer': 'https://new11.filepress.store/file/65b2ade3869e1f441ca95579',
+                  'priority': 'u=1, i',
+                  'referer': 'https://new12.filepress.store/file/65b2ade3869e1f441ca95579',
+                  'sec-ch-ua': '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"',
+                  'sec-ch-ua-mobile': '?1',
+                  'sec-ch-ua-platform': '"Android"',
                   'sec-fetch-dest': 'empty',
                   'sec-fetch-mode': 'cors',
                   'sec-fetch-site': 'same-origin',
-                  'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
+                  'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36',
               }
               url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://filepress.click/file/',i.strip())
               match = re.findall(r"\/[1-9a-zA-Z0]+$",url.strip())
@@ -639,24 +643,27 @@ def handle_all_messages(message):
                 url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/d\/','https://gofile.io/d/',i.strip())
                 contentID = i.split('/')[-1]
                 headers = {
-                    'authority': 'api.gofile.io',
-                    'accept': '*/*',
-                    'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
-                    'if-none-match': 'W/"329-SJr3OASTkHsLDEFQfG7KOyG44HA"',
-                    'origin': 'https://gofile.io',
-                    'sec-fetch-dest': 'empty',
-                    'sec-fetch-mode': 'cors',
-                    'sec-fetch-site': 'same-site',
-                    'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
-                }
+                     'accept': '*/*',
+                     'accept-language': 'en-US,en;q=0.9',
+                     'authorization': 'Bearer HK2I2WaNk1l9TWByyBU5SWaMLmNrmV7O',
+                     'if-none-match': 'W/"315-C35DQMzRaLtPZYV9B6kfak5B8YI"',
+                     'origin': 'https://gofile.io',
+                     'priority': 'u=1, i',
+                     'referer': 'https://gofile.io/',
+                     'sec-ch-ua': '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"',
+                     'sec-ch-ua-mobile': '?0',
+                     'sec-ch-ua-platform': '"Windows"',
+                     'sec-fetch-dest': 'empty',
+                     'sec-fetch-mode': 'cors',
+                     'sec-fetch-site': 'same-site',
+                     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+                 }
 
                 params = {
-                    'contentId': f'{contentID}',
-                    'token': 'FJ8cUQmOH6cjobZVmcq9iwlY0E1hrqUM',
                     'wt': '4fd6sg89d7s6',
                 }
 
-                response = requests.get('https://api.gofile.io/getContent', params=params, headers=headers)
+                response = requests.get(f"https://api.gofile.io/contents/{contentID}", params=params, headers=headers)
                 title = response.json()['data']['contents'][f"{list(response.json()['data']['contents'].keys())[0]}"]['name']
                 size = humanize.naturalsize(int(response.json()['data']['contents'][f"{list(response.json()['data']['contents'].keys())[0]}"]['size']))
                 print(title)
