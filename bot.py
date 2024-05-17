@@ -97,60 +97,13 @@ img_link = ['https://i.pinimg.com/originals/2b/38/1e/2b381e29d6c14418cf104d07803
  'https://i.pinimg.com/originals/ef/d5/20/efd5204be4582beefabc2f59273673b7.jpg',
  'https://i.pinimg.com/originals/6b/0e/35/6b0e353d61f7f0f620cb5526561140a1.jpg']
 
-def gplink(link):
-  link = unquote(link)
-  print(link)
-  s = requests.session()
-  html = s.get(f"https://publicearn.com/st?api=a1bb968c95a6bbe5b9ad636986ad36dc5276bbdb&url={link}")
-  soup =  BeautifulSoup(html.text,'lxml')
-  print(soup)
-  headers = {
-      'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-      'accept-language': 'en-US,en;q=0.9',
-      'cache-control': 'max-age=0',
-      'content-type': 'application/x-www-form-urlencoded',
-      # 'cookie': 'csrfToken=1c37c048148b03a12e8d995e3ad0820cee6ab6990a0d23824e8427423104357f7811c40dee5cd9516f570a99655800375a54a1f817c43f2bc0f7474276917a42; AppSession=45c4c01b89f993e31a17ea441243708a; cf_clearance=FWoYqICOQ2n.yLcNTfUrpUpVP.LNCjZc8GH.ce2f.mw-1715960367-1.0.1.1-0fEX7gAKNBkWQZtc.w_SK8JBp56FE.mPveorcZTTlKIWcD4ODk5PGwEqDgC4rnIMc.6s31Ya3s8bflkZuSq84w; app_visitor=Q2FrZQ%3D%3D.ZTY2Y2NlMjNhODY1ZDcyOGIyMzVhNzU5YzliMWFhZDE4MjBiOWU5ZThhN2VmNTU2MDdkM2EzZDI1YzFkZmI2ZM8fl96diDn8TJUR3pvM9mGX7MnCTW5BFomDPzRy6czsjLYU2e4GXxCnO9PZ2Xp0Dcmju77hMjjD0x2TW4Ox%2FQBRTE5i3wpYSdxIlrEq6p9y; ab=2; refa9AmS=YzgzZjAwMGM0YjRkMTA1OTc1OTZhMjJkMjM4Mjc1YjdkMzdlMDY4NWVlMzhkYzQ2YjEwYjEzYmY1OGYzYjI3Y8%2BTanPD065NrddF9MXXyq1JnKjFvJ9g2W7Q8zkCvenhXky4DFdS%2Bf5tF14V%2F%2FM%2BMvnFv0cBggebjajKIi9phrh2ICO%2FBQHzTIHGzlkr1mOJav77ZGMmZmxd4lOsQD6%2BjQMCbuX3yFOjY2EdXU%2BTnZnEAtevWsj%2BL02OlOhFVVZG',
-      'origin': 'https://publicearn.com',
-      'priority': 'u=0, i',
-      'referer': 'https://publicearn.com/st?api=a1bb968c95a6bbe5b9ad636986ad36dc5276bbdb&url=yourdestinationlink.com',
-      'sec-ch-ua': '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"',
-      'sec-ch-ua-arch': '"x86"',
-      'sec-ch-ua-bitness': '"64"',
-      'sec-ch-ua-full-version': '"124.0.6367.208"',
-      'sec-ch-ua-full-version-list': '"Chromium";v="124.0.6367.208", "Google Chrome";v="124.0.6367.208", "Not-A.Brand";v="99.0.0.0"',
-      'sec-ch-ua-mobile': '?0',
-      'sec-ch-ua-model': '""',
-      'sec-ch-ua-platform': '"Windows"',
-      'sec-ch-ua-platform-version': '"15.0.0"',
-      'sec-fetch-dest': 'document',
-      'sec-fetch-mode': 'navigate',
-      'sec-fetch-site': 'same-origin',
-      'upgrade-insecure-requests': '1',
-      'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
-  }
 
-  params = {
-      'api': 'a1bb968c95a6bbe5b9ad636986ad36dc5276bbdb',
-      'url': f'{link}',
-  }
-
-  data = {
-      '_method': 'POST',
-      '_csrfToken': soup.find('input',{'name':'_csrfToken'})['value'],
-      'api': 'a1bb968c95a6bbe5b9ad636986ad36dc5276bbdb',
-      'url': f'{link}',
-      '_Token[fields]': soup.find('input',{'name':'_Token[fields]'})['value'],
-      '_Token[unlocked]': soup.find('input',{'name':'_Token[unlocked]'})['value'],
-  }
-
-  response = s.post('https://publicearn.com/st', params=params, headers=headers, data=data)
-  print(response.url)
-  return response.url
  
-# def gplink(link):
-#   html = requests.get(f"https://gplinks.in/api?api=14babc9511f3680505742438efe33ba2c7026c43&url={link}")
-#   link = json.loads(html.text)['shortenedUrl']
-#   return link
+def gplink(link):
+  # html = requests.get(f"https://gplinks.in/api?api=14babc9511f3680505742438efe33ba2c7026c43&url={link}")
+  html = requests.get(f"https://publicearn.com/api?api=a1bb968c95a6bbe5b9ad636986ad36dc5276bbdb&url={link}")
+  link = json.loads(html.text)['shortenedUrl']
+  return link
 
 def appdrive(link,id,message):
   data = []
