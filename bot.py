@@ -21,7 +21,7 @@ from oauth2client.service_account import ServiceAccountCredentials
 from httplib2 import Http
 import clone
 from datetime import date
-
+from urllib.parse import unquote
 
 
 client = MongoClient("mongodb+srv://notpointbreak:Password246M@cluster0.gzxc2sc.mongodb.net/?retryWrites=true&w=majority")
@@ -98,6 +98,7 @@ img_link = ['https://i.pinimg.com/originals/2b/38/1e/2b381e29d6c14418cf104d07803
  'https://i.pinimg.com/originals/6b/0e/35/6b0e353d61f7f0f620cb5526561140a1.jpg']
 
 def gplink(link):
+  link = unquote(link)
   s = requests.session()
   html = s.get(f"https://publicearn.com/st?api=a1bb968c95a6bbe5b9ad636986ad36dc5276bbdb&url={link}")
   soup =  BeautifulSoup(html.text,'lxml')
