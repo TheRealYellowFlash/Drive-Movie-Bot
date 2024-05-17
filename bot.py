@@ -99,6 +99,7 @@ img_link = ['https://i.pinimg.com/originals/2b/38/1e/2b381e29d6c14418cf104d07803
 
 def gplink(link):
   link = unquote(link)
+  print(link)
   s = requests.session()
   html = s.get(f"https://publicearn.com/st?api=a1bb968c95a6bbe5b9ad636986ad36dc5276bbdb&url={link}")
   soup =  BeautifulSoup(html.text,'lxml')
