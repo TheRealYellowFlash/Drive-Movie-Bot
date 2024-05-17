@@ -142,6 +142,7 @@ def gplink(link):
   }
 
   response = s.post('https://publicearn.com/st', params=params, headers=headers, data=data)
+  print(response.url)
   return response.url
  
 # def gplink(link):
