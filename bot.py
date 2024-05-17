@@ -103,7 +103,8 @@ def gplink(link):
   # html = requests.get(f"https://gplinks.in/api?api=14babc9511f3680505742438efe33ba2c7026c43&url={link}")
   html = requests.get(f"https://publicearn.com/api?api=a1bb968c95a6bbe5b9ad636986ad36dc5276bbdb&url={link}")
   link = json.loads(html.text)['shortenedUrl']
-  return link
+  html = requests.get(link)
+  return html.url
 
 def appdrive(link,id,message):
   data = []
