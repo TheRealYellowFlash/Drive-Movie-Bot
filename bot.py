@@ -102,7 +102,7 @@ def gplink(link):
   s = requests.session()
   html = s.get(f"https://publicearn.com/st?api=a1bb968c95a6bbe5b9ad636986ad36dc5276bbdb&url={link}")
   soup =  BeautifulSoup(html.text,'lxml')
-
+  print(soup)
   headers = {
       'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
       'accept-language': 'en-US,en;q=0.9',
