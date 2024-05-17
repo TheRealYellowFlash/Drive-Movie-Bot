@@ -215,9 +215,9 @@ def start(message):
             print(data)
             link = data[0]['link']
             if 'gdtot' in link:
-                link = link.replace('new6.gdtot.cfd', 'new.gdtot.dad')
+                link = link.replace('new6.gdtot.cfd', 'new3.gdtot.dad')
             elif 'filepress' in link:
-                link = link.replace('https://filepress.click', 'new12.filepress.store')
+                link = link.replace('https://filepress.click', 'new14.filepress.store')
             elif 'appdrive' in link:
                 link = link.replace('.pro', '.lol')
             elif 'gdflix' in link:
@@ -366,22 +366,21 @@ def handle_all_messages(message):
               headers = {
                   'accept': 'application/json, text/plain, */*',
                   'accept-language': 'en-US,en;q=0.9',
-                  'if-none-match': 'W/"5fe-TpEueCpcvygSM+oou677s7vn0VI"',
                   'priority': 'u=1, i',
-                  'referer': 'https://new12.filepress.store/file/65b2ade3869e1f441ca95579',
+                  'referer': 'https://new14.filepress.store/file/65b2ade3869e1f441ca95579',
                   'sec-ch-ua': '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"',
-                  'sec-ch-ua-mobile': '?1',
-                  'sec-ch-ua-platform': '"Android"',
+                  'sec-ch-ua-mobile': '?0',
+                  'sec-ch-ua-platform': '"Windows"',
                   'sec-fetch-dest': 'empty',
                   'sec-fetch-mode': 'cors',
                   'sec-fetch-site': 'same-origin',
-                  'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36',
+                  'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
               }
               url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://filepress.click/file/',i.strip())
               match = re.findall(r"\/[1-9a-zA-Z0]+$",url.strip())
               code = match[0][1::]
               if code:
-                html = requests.get(f"https://new12.filepress.store/api/file/get/{code}", headers=headers)
+                html = requests.get(f"https://new14.filepress.store/api/file/get/{code}", headers=headers)
                 soup = BeautifulSoup(html.text,'lxml')
                 jk = json.loads(html.text)
                 new_tit = jk['data']['name']
