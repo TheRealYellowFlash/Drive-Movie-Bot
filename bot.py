@@ -249,6 +249,12 @@ def start(message):
                 button2 = telebot.types.InlineKeyboardButton(text=f"Retry 🔄", url=f"https://t.me/DriveMovie_bot?start={code[0]}")
                 keyboard = telebot.types.InlineKeyboardMarkup().add(button1).add(button2)
                 bot.reply_to(message, text=f"You need to verify before continuing", parse_mode="html", disable_web_page_preview=True,reply_markup=keyboard)
+            else:
+              tokens_collection.delete_many({'user_id': message.from_user.id})
+              button1 = telebot.types.InlineKeyboardButton(text=f"verify ✅ ", url=f"{generate_adlink(message)}")
+              button2 = telebot.types.InlineKeyboardButton(text=f"Retry 🔄", url=f"https://t.me/DriveMovie_bot?start={code[0]}")
+              keyboard = telebot.types.InlineKeyboardMarkup().add(button1).add(button2)
+              bot.reply_to(message, text=f"You need to verify before continuing", parse_mode="html", disable_web_page_preview=True,reply_markup=keyboard)
 
 @bot.message_handler(commands=['shundi']) 
 def shundi(message):
