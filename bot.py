@@ -23,6 +23,7 @@ import clone
 from datetime import date
 from urllib.parse import unquote
 import datetime
+import string
 
 client = MongoClient("mongodb+srv://notpointbreak:Password246M@cluster0.gzxc2sc.mongodb.net/?retryWrites=true&w=majority")
 db = client.get_database('bifrost')
