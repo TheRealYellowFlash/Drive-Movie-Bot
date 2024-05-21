@@ -1051,6 +1051,8 @@ def genddl(taskid):
   url = response.json()['download']
   if 'http' in url:
     return url
+  else:
+   return 'none'
    
    
 def gdfbypass(link):
