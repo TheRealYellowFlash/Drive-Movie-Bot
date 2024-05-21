@@ -214,7 +214,7 @@ def start(message):
             keyboard = telebot.types.InlineKeyboardMarkup().add(button).add(button1)
             message_id1 = bot.send_message(chat_id=message.chat.id, text=f"Please *Join* My Status Channel and Try again to Get Link!", parse_mode='markdown', disable_web_page_preview=True, reply_markup=keyboard).message_id
         else:
-          if "WVsbG93Rmxhc2g" not in code[0]:
+          if "Yellow" not in code[0]:
               validate_short_token(message,code[0])
           else:
             print('movie thing')
