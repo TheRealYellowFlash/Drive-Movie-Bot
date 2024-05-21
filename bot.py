@@ -33,6 +33,10 @@ client = MongoClient("mongodb+srv://yellowflash:Password246M?@cluster0.nzv7x2e.m
 db = client.get_database('bifrost')
 tokens_collection = db.token
 
+client = MongoClient("mongodb+srv://yellowflash:Password246M?@cluster0.nzv7x2e.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+db = client.get_database('bifrost')
+ddlinks = db.bbg
+
 TOKEN = '6530908059:AAEsMAx3YoJoA04eCcfaLRskXOFtFkuUvqo'
 
 bot = telebot.TeleBot(TOKEN)
@@ -237,7 +241,16 @@ def start(message):
                 elif 'gofile' in link:
                     link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/d\/','https://gofile.io/d/',link)
                 print(link)
-                text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n*⚡powered by* @GdtotLinkz"
+                datafake = list(ddlinks.find({"title": data[0]['title']}))
+                if datafake:
+                 try:
+                  bp_url = genddl(datafake['task_id'])
+                  try:
+                   text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n🌎<code>Bypassed Link : </code>{bp_url}*⚡powered by* @GdtotLinkz"
+                  except:
+                   text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n*⚡powered by* @GdtotLinkz"
+                 except:
+                  text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n*⚡powered by* @GdtotLinkz"
                 # text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {gplink}\n\n*⚡powered by* @GdtotLinkz"
                 bot.delete_message(chat_id=message.chat.id, message_id=message_ids)
                 button1 = telebot.types.InlineKeyboardButton(text=f"Fast Dowload 🚀", url='https://publicearn.com/DDLHVN')
@@ -975,4 +988,41 @@ def generate_adlink(message):
   html = requests.get(linker)
   return html.url
  
+def genddl(taskid):
+  cookies = {
+      'PHPSESSID': '1b9jajssdm055kgj3bom03n3vm',
+  }
+  headers = {
+      'accept': '*/*',
+      'accept-language': 'en-US,en;q=0.9',
+      'content-type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      # 'cookie': 'PHPSESSID=8mre86giff09if9k0gtkdpmptm',
+      'origin': 'https://new3.gdtot.dad',
+      'priority': 'u=1, i',
+      'referer': 'https://new3.gdtot.dad/ondl',
+      'sec-ch-ua': '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"',
+      'sec-ch-ua-mobile': '?1',
+      'sec-ch-ua-platform': '"Android"',
+      'sec-fetch-dest': 'empty',
+      'sec-fetch-mode': 'cors',
+      'sec-fetch-site': 'same-origin',
+      'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Mobile Safari/537.36',
+      'x-requested-with': 'XMLHttpRequest',
+  }
+
+  params = {
+      'ajax': 'chksts',
+  }
+
+  data = {
+      'task_id': f'{taskid}',
+      'sizee': '5.76 GB',
+      'gdid': '10122712544',
+  }
+
+  response = requests.post('https://new3.gdtot.dad/ajax.php', params=params, cookies=cookies, headers=headers, data=data)
+  url = response.json()['download']
+  if 'http' in url:
+    return url
+   
 bot.infinity_polling(timeout=10, long_polling_timeout=5)
