@@ -929,6 +929,7 @@ def dispose():
                 except Exception as e:
                     print(e)
                     pass
+                 
 def generate_short_token(message,length=6):
     token = ''.join(random.choices(string.ascii_letters + string.digits, k=length))
     expiration_time = datetime.datetime.utcnow() + datetime.timedelta(hours=1)
@@ -946,18 +947,18 @@ def validate_short_token(message,token):
     token_data = tokens_collection.find_one({'user_id': message.from_user.id})
     if token_data:
         if token_data['expires_at'] > datetime.datetime.utcnow():
-            bot.reply_to(message, text=f"Token is valid , you can get unlimited Movie/show links for 1 hour ", parse_mode="html", disable_web_page_preview=True)
+            bot.reply_to(message, text=f"<b>Token is valid , you can get unlimited Movie/show links for 1 hour 😇</b>", parse_mode="html", disable_web_page_preview=True)
             return True
         else:
             tokens_collection.delete_many({'user_id': message.from_user.id})
-            button1 = telebot.types.InlineKeyboardButton(text=f"generate New token", url=f"{generate_adlink(message)}")
+            button1 = telebot.types.InlineKeyboardButton(text=f"⚡ generate New token ", url=f"{generate_adlink(message)}")
             keyboard = telebot.types.InlineKeyboardMarkup().add(button1)
-            bot.reply_to(message, text=f"Token is expired or invalid ,Generate New one and verify", parse_mode="html", disable_web_page_preview=True,reply_markup=keyboard)
+            bot.reply_to(message, text=f"Token is expired or invalid ,<code>Generate New one and verify✅</code>", parse_mode="html", disable_web_page_preview=True,reply_markup=keyboard)
             
     else:
         button1 = telebot.types.InlineKeyboardButton(text=f"generate New token", url=f"{generate_adlink(message)}")
         keyboard = telebot.types.InlineKeyboardMarkup().add(button1)
-        bot.reply_to(message, text=f"Token is old ,Generate New one and verify", parse_mode="html", disable_web_page_preview=True,reply_markup=keyboard)
+        bot.reply_to(message, text=f"Token is old ⌛,<code>Generate New one and verify ✅</code>", parse_mode="html", disable_web_page_preview=True,reply_markup=keyboard)
     return False
 
 def generate_adlink(message):
