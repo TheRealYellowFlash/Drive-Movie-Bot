@@ -254,7 +254,7 @@ def start(message):
                 elif 'gdflix' in link:
                     link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new1.gdflix.cfd/file/',link)
                     try:
-                      bplink = gdfbypass(link.replace('file','zfile'))
+                      # bplink = gdfbypass(link.replace('file','zfile'))
                       print(bplink)
                     except:
                       bplink = 'none'
