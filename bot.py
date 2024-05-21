@@ -207,7 +207,6 @@ def start(message):
         keyboard = telebot.types.InlineKeyboardMarkup().add(button)
         bot.send_photo(chat_id=message.chat.id, photo=f"{random.choice(img_link)}", caption=f"Hey 👋🏻 `{str(message.chat.first_name)}`,\n\nThis 🤖 Bot is the Exclusive property of [Ye1lowFlash](https://t.me/Ye1lowFlash).\nIts a *Movie Search bot* , You'll get Movie as a google drive link\nTry searching `avengers` .\n\n*⚡️powered by* @GdtotLinkz", parse_mode="markdown", reply_markup=keyboard) 
     else:
-        bot.send_message(-1001975502922, text=f"#{message.chat.id}\n\nUsername : [{message.from_user.full_name}](tg://user?id={message.from_user.id})\n\nGot Link for `{code[0]}`", parse_mode='markdown', disable_web_page_preview=True)
         if check_member.status not in ["member", "creator", "administrator"]:
             button = telebot.types.InlineKeyboardButton(text="Join Channel 🔗", url=f"https://t.me/+UHMom5MO8KU1MzFl")
             button1 = telebot.types.InlineKeyboardButton(text="Try again 🔄 ", url=f"https://t.me/DriveMovie_bot?start={code[0]}")
@@ -219,7 +218,9 @@ def start(message):
               myquery = { "token": code[0] }
               newvalues = { "$set": { "valid": True } }
               tokens_collection.update_one(myquery, newvalues)
+              bot.send_message(-1001975502922, text=f"#{message.chat.id}\n\nUsername : [{message.from_user.full_name}](tg://user?id={message.from_user.id})\n\nGot verified ✅", parse_mode='markdown', disable_web_page_preview=True)
           else:
+            bot.send_message(-1001975502922, text=f"#{message.chat.id}\n\nUsername : [{message.from_user.full_name}](tg://user?id={message.from_user.id})\n\nGot Link for `{code[0]}`", parse_mode='markdown', disable_web_page_preview=True)
             print('movie thing')
             token_data = tokens_collection.find_one({'user_id': message.from_user.id})
             if token_data:
