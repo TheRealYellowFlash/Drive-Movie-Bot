@@ -939,7 +939,7 @@ def dispose():
                  
 def generate_short_token(message,length=6):
     token = ''.join(random.choices(string.ascii_letters + string.digits, k=length))
-    expiration_time = datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+    expiration_time = datetime.datetime.utcnow() + datetime.timedelta(hours=2)
     token_data = {
         'token': token,
         'expires_at': expiration_time,
