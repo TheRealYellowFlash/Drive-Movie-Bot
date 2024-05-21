@@ -28,6 +28,10 @@ client = MongoClient("mongodb+srv://notpointbreak:Password246M@cluster0.gzxc2sc.
 db = client.get_database('bifrost')
 links = db.gdtot
 
+client = MongoClient("mongodb+srv://yellowflash:Password246M?@cluster0.nzv7x2e.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+db = client.get_database('bifrost')
+tokens_collection = db.token
+
 TOKEN = '6530908059:AAEsMAx3YoJoA04eCcfaLRskXOFtFkuUvqo'
 
 bot = telebot.TeleBot(TOKEN)
@@ -204,34 +208,46 @@ def start(message):
             keyboard = telebot.types.InlineKeyboardMarkup().add(button).add(button1)
             message_id1 = bot.send_message(chat_id=message.chat.id, text=f"Please *Join* My Status Channel and Try again to Get Link!", parse_mode='markdown', disable_web_page_preview=True, reply_markup=keyboard).message_id
         else:
-            try:
-                bot.delete_message(message.chat.id, message_id=message_id1)
-            except:
-                pass
-            message_ids = bot.reply_to(message, text=f"𝐆𝐞𝐧𝐞𝐫𝐚𝐭𝐢𝐧𝐠 𝐋𝐢𝐧𝐤 🔄", parse_mode='markdown', disable_web_page_preview=True).message_id
-            url = decrypt(code[0])
-            print(url)
-            data = list(links.find({"link": url}))
-            print(data)
-            link = data[0]['link']
-            if 'gdtot' in link:
-                link = link.replace('new6.gdtot.cfd', 'new3.gdtot.dad')
-            elif 'filepress' in link:
-                link = link.replace('https://filepress.click', 'new14.filepress.store')
-            elif 'appdrive' in link:
-                link = link.replace('.pro', '.lol')
-            elif 'gdflix' in link:
-                link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new3.gdflix.dad/file/',link)
-            elif 'gofile' in link:
-                link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/d\/','https://gofile.io/d/',link)
-            print(link)
-            link = gplink(link)
-            text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n*⚡powered by* @GdtotLinkz"
-            # text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {gplink}\n\n*⚡powered by* @GdtotLinkz"
-            bot.delete_message(chat_id=message.chat.id, message_id=message_ids)
-            button1 = telebot.types.InlineKeyboardButton(text=f"Fast Dowload", url='https://publicearn.com/DDLHVN')
-            keyboard = telebot.types.InlineKeyboardMarkup().add(button1)
-            message_ids = bot.reply_to(message, text=text, parse_mode='markdown', disable_web_page_preview=True,reply_markup=keyboard)
+          if "yellow" not in code[0]:
+              validate_short_token(message,code[0])
+          else:
+            print('movie thing')
+            token_data = tokens_collection.find_one({'user_id': message.from_user.id})
+            if token_data:
+              if token_data['expires_at'] > datetime.datetime.utcnow():
+                try:
+                    bot.delete_message(message.chat.id, message_id=message_id1)
+                except:
+                    pass
+                message_ids = bot.reply_to(message, text=f"𝐆𝐞𝐧𝐞𝐫𝐚𝐭𝐢𝐧𝐠 𝐋𝐢𝐧𝐤 🔄", parse_mode='markdown', disable_web_page_preview=True).message_id
+                url = decrypt(code[0])
+                print(url)
+                data = list(links.find({"link": url}))
+                print(data)
+                link = data[0]['link']
+                if 'gdtot' in link:
+                    link = link.replace('new6.gdtot.cfd', 'new3.gdtot.dad')
+                elif 'filepress' in link:
+                    link = link.replace('https://filepress.click', 'new14.filepress.store')
+                elif 'appdrive' in link:
+                    link = link.replace('.pro', '.lol')
+                elif 'gdflix' in link:
+                    link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new3.gdflix.dad/file/',link)
+                elif 'gofile' in link:
+                    link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/d\/','https://gofile.io/d/',link)
+                print(link)
+                text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n*⚡powered by* @GdtotLinkz"
+                # text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {gplink}\n\n*⚡powered by* @GdtotLinkz"
+                bot.delete_message(chat_id=message.chat.id, message_id=message_ids)
+                button1 = telebot.types.InlineKeyboardButton(text=f"Fast Dowload 🚀", url='https://publicearn.com/DDLHVN')
+                keyboard = telebot.types.InlineKeyboardMarkup().add(button1)
+                message_ids = bot.reply_to(message, text=text, parse_mode='markdown', disable_web_page_preview=True,reply_markup=keyboard)
+              else:
+                tokens_collection.delete_many({'user_id': message.from_user.id})
+                button1 = telebot.types.InlineKeyboardButton(text=f"verify ✅ ", url=f"{generate_adlink(message)}")
+                button2 = telebot.types.InlineKeyboardButton(text=f"Retry 🔄", url=f"https://t.me/DriveMovie_bot?start={code[0]}")
+                keyboard = telebot.types.InlineKeyboardMarkup().add(button1).add(button2)
+                bot.reply_to(message, text=f"You need to verify before continuing", parse_mode="html", disable_web_page_preview=True,reply_markup=keyboard)
 
 @bot.message_handler(commands=['shundi']) 
 def shundi(message):
@@ -913,5 +929,42 @@ def dispose():
                 except Exception as e:
                     print(e)
                     pass
+def generate_short_token(message,length=6):
+    token = ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+    expiration_time = datetime.datetime.utcnow() + datetime.timedelta(hours=1)
+    token_data = {
+        'token': token,
+        'expires_at': expiration_time,
+        "user_id" : message.from_user.id
+    }
+    tokens_collection.insert_one(token_data)
+    return token
 
+
+
+def validate_short_token(message,token):
+    token_data = tokens_collection.find_one({'user_id': message.from_user.id})
+    if token_data:
+        if token_data['expires_at'] > datetime.datetime.utcnow():
+            bot.reply_to(message, text=f"Token is valid , you can get unlimited Movie/show links for 1 hour ", parse_mode="html", disable_web_page_preview=True)
+            return True
+        else:
+            tokens_collection.delete_many({'user_id': message.from_user.id})
+            button1 = telebot.types.InlineKeyboardButton(text=f"generate New token", url=f"{generate_adlink(message)}")
+            keyboard = telebot.types.InlineKeyboardMarkup().add(button1)
+            bot.reply_to(message, text=f"Token is expired or invalid ,Generate New one and verify", parse_mode="html", disable_web_page_preview=True,reply_markup=keyboard)
+            
+    else:
+        button1 = telebot.types.InlineKeyboardButton(text=f"generate New token", url=f"{generate_adlink(message)}")
+        keyboard = telebot.types.InlineKeyboardMarkup().add(button1)
+        bot.reply_to(message, text=f"Token is old ,Generate New one and verify", parse_mode="html", disable_web_page_preview=True,reply_markup=keyboard)
+    return False
+
+def generate_adlink(message):
+  # html = requests.get(f"https://gplinks.in/api?api=14babc9511f3680505742438efe33ba2c7026c43&url={link}")
+  html = requests.get(f"https://publicearn.com/api?api=a1bb968c95a6bbe5b9ad636986ad36dc5276bbdb&url=https://t.me/DriveMovie_bot?start={generate_short_token(message)}")
+  linker = json.loads(html.text)['shortenedUrl']
+  html = requests.get(linker)
+  return html.url
+ 
 bot.infinity_polling(timeout=10, long_polling_timeout=5)
