@@ -216,11 +216,14 @@ def start(message):
         else:
           if "Yellow" not in code[0]:
               validate_short_token(message,code[0])
+              myquery = { "token": code[0] }
+              newvalues = { "$set": { "valid": True } }
+              tokens_collection.update_one(myquery, newvalues)
           else:
             print('movie thing')
             token_data = tokens_collection.find_one({'user_id': message.from_user.id})
             if token_data:
-              if token_data['expires_at'] > datetime.datetime.utcnow():
+              if token_data['expires_at'] > datetime.datetime.utcnow() and token_data['valid'] == True:
                 try:
                     bot.delete_message(message.chat.id, message_id=message_id1)
                 except:
@@ -982,7 +985,8 @@ def generate_short_token(message,length=6):
     token_data = {
         'token': token,
         'expires_at': expiration_time,
-        "user_id" : message.from_user.id
+        "user_id" : message.from_user.id,
+        "valid" : False
     }
     tokens_collection.insert_one(token_data)
     return token
