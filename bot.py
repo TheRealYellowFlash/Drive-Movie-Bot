@@ -1022,6 +1022,7 @@ def genddl(taskid):
   response = requests.post('https://new3.gdtot.dad/ajax.php', params=params, cookies=cookies, headers=headers, data=data)
   url = response.json()['download']
   if 'http' in url:
+    print(url)
     return url
    
 bot.infinity_polling(timeout=10, long_polling_timeout=5)
