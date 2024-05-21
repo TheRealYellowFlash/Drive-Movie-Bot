@@ -233,7 +233,7 @@ def start(message):
                 elif 'appdrive' in link:
                     link = link.replace('.pro', '.lol')
                 elif 'gdflix' in link:
-                    link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new3.gdflix.dad/file/',link)
+                    link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new1.gdflix.cfd/file/',link)
                 elif 'gofile' in link:
                     link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/d\/','https://gofile.io/d/',link)
                 print(link)
