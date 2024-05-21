@@ -247,7 +247,8 @@ def start(message):
                   bp_url = genddl(int(datafake['task_id']))
                   print(bp_url)
                   text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n🌎<code>Bypassed Link : </code>{bp_url}*⚡powered by* @GdtotLinkz"
-                 except:
+                 except Exception as e:
+                  print(e)
                   text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n*⚡powered by* @GdtotLinkz"
                 # text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {gplink}\n\n*⚡powered by* @GdtotLinkz"
                 bot.delete_message(chat_id=message.chat.id, message_id=message_ids)
