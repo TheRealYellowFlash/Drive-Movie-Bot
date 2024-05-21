@@ -939,7 +939,7 @@ def dispose():
                  
 def generate_short_token(message,length=6):
     token = ''.join(random.choices(string.ascii_letters + string.digits, k=length))
-    expiration_time = datetime.datetime.utcnow() + datetime.timedelta(hours=2)
+    expiration_time = datetime.datetime.now(datetime.UTC) + datetime.timedelta(hours=2)
     token_data = {
         'token': token,
         'expires_at': expiration_time,
@@ -953,7 +953,7 @@ def generate_short_token(message,length=6):
 def validate_short_token(message,token):
     token_data = tokens_collection.find_one({'user_id': message.from_user.id})
     if token_data:
-        if token_data['expires_at'] > datetime.datetime.utcnow():
+        if token_data['expires_at'] > datetime.datetime.now(datetime.UTC):
             bot.reply_to(message, text=f"<b>Token is valid , you can get unlimited Movie/show links for 1 hour 😇</b>", parse_mode="html", disable_web_page_preview=True)
             return True
         else:
