@@ -231,7 +231,7 @@ def start(message):
                 elif 'filepress' in link:
                     link = link.replace('https://filepress.click', 'new14.filepress.store')
                 elif 'appdrive' in link:
-                    link = link.replace('.pro', '.lol')
+                    link = link.replace('.pro', '.dev')
                 elif 'gdflix' in link:
                     link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new1.gdflix.cfd/file/',link)
                 elif 'gofile' in link:
