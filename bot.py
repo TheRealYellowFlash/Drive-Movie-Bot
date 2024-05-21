@@ -196,6 +196,7 @@ def appdrive(link,id,message):
 
 @bot.message_handler(commands=['start']) 
 def start(message):
+    bplink = 'none'
     code = extract_arg(message.text)
     CHAT_ID = -1002145126461
     USER_ID = message.from_user.id
@@ -230,26 +231,40 @@ def start(message):
                 data = list(links.find({"link": url}))
                 print(data)
                 link = data[0]['link']
+                title = data[0]['title']
                 if 'gdtot' in link:
                     link = link.replace('new6.gdtot.cfd', 'new3.gdtot.dad')
+                    datafake = list(ddlinks.find({"title": data[0]['title']}))
+                    if datafake:
+                      try:
+                        print('doing bypass')
+                        bplink = genddl(datafake[0]['task_id'])
+                        print(bplink)
+                      except Exception as e:
+                        print(e)
+                        pass
                 elif 'filepress' in link:
                     link = link.replace('https://filepress.click', 'new14.filepress.store')
                 elif 'appdrive' in link:
                     link = link.replace('.pro', '.dev')
                 elif 'gdflix' in link:
                     link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new1.gdflix.cfd/file/',link)
+                    try:
+                      bplink = gdfbypass(link.replace('file','zfile'))
+                      print(bplink)
+                    except:
+                      bplink = 'none'
                 elif 'gofile' in link:
                     link = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/d\/','https://gofile.io/d/',link)
                 print(link)
-                datafake = list(ddlinks.find({"title": data[0]['title']}))
-                if datafake:
-                 try:
-                  bp_url = genddl(int(datafake['task_id']))
-                  print(bp_url)
-                  text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n🌎<code>Bypassed Link : </code>{bp_url}*⚡powered by* @GdtotLinkz"
-                 except Exception as e:
-                  print(e)
-                  text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n*⚡powered by* @GdtotLinkz"
+                if 'http' in bplink:
+                  try:
+                    text = f"🎥\t*{title}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n🌎*Bypassed Link :* ```{bplink}```\n\n*⚡powered by* @GdtotLinkz"
+                  except Exception as e:
+                    print(f"[bypass] {e}")
+                    text = f"🎥\t*{title}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n*⚡powered by* @GdtotLinkz"
+                else:
+                  text = f"🎥\t*{title}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n*⚡powered by* @GdtotLinkz"
                 # text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {gplink}\n\n*⚡powered by* @GdtotLinkz"
                 bot.delete_message(chat_id=message.chat.id, message_id=message_ids)
                 button1 = telebot.types.InlineKeyboardButton(text=f"Fast Dowload 🚀", url='https://publicearn.com/DDLHVN')
@@ -529,25 +544,37 @@ def handle_all_messages(message):
                 post_body = {
                   "cmd": "request.get",
                   "url":f"{url1}",
-                  "maxTimeout": 120000
+                  "maxTimeout": 60000
                 }
                 response = requests.post('https://flr-65c636259ed4.herokuapp.com/v1', headers={'Content-Type': 'application/json'}, json=post_body)
-                fsdata = json.loads(response.text)
-                soup = BeautifulSoup(fsdata['solution']['response'],'lxml')
-                if soup.title.text != 'GDFlix | GDFlix':
-                  for i in soup.find_all('li',{'class':'list-group-item'}):
-                    data.append(i.text)
-                  title = data[0][7::]
-                  size = data[2][7::]
-                  try:
-                      m = re.split(r".[1-90]{4}",title)
-                      n = re.search(r"[1-90]{4}",title)
-                      k = re.sub("\.", " ", m[0])
-                      new_title = f"{k} {n.group(0)}"
-                  except:
-                      m = re.split(r".[1-90]{3}",title)
-                      k = re.sub("\.", " ", m[0])
-                      new_title = f"{k}"
+                try:
+                  fsdata = json.loads(response.text)
+                  soup = BeautifulSoup(fsdata['solution']['response'],'lxml')
+                  if soup.title.text != 'GDFlix | GDFlix':
+                    for i in soup.find_all('li',{'class':'list-group-item'}):
+                      data.append(i.text)
+                    title = data[0][7::]
+                    size = data[2][7::]
+                except:
+                  post_body = {
+                  "cmd": "request.get",
+                  "url":f"{url1.replace('file','zfile')}",
+                  "maxTimeout": 60000
+                  }
+                  response = requests.post('https://flr-65c636259ed4.herokuapp.com/v1', headers={'Content-Type': 'application/json'}, json=post_body)
+                  fsdata = json.loads(response.text)
+                  soup = BeautifulSoup(fsdata['solution']['response'],'lxml')
+                  size = soup.find('h5').text.strip().split('[')[-1][:-1].strip()
+                  title = soup.find('h5').text.strip().split('[')[0].strip()
+                try:
+                    m = re.split(r".[1-90]{4}",title)
+                    n = re.search(r"[1-90]{4}",title)
+                    k = re.sub("\.", " ", m[0])
+                    new_title = f"{k} {n.group(0)}"
+                except:
+                    m = re.split(r".[1-90]{3}",title)
+                    k = re.sub("\.", " ", m[0])
+                    new_title = f"{k}"
               headers = {
               'authority': 'www.imdb.com',
               'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
@@ -951,7 +978,7 @@ def dispose():
                  
 def generate_short_token(message,length=6):
     token = ''.join(random.choices(string.ascii_letters + string.digits, k=length))
-    expiration_time = datetime.datetime.now(datetime.UTC) + datetime.timedelta(hours=2)
+    expiration_time = datetime.datetime.utcnow() + datetime.timedelta(hours=2)
     token_data = {
         'token': token,
         'expires_at': expiration_time,
@@ -965,7 +992,7 @@ def generate_short_token(message,length=6):
 def validate_short_token(message,token):
     token_data = tokens_collection.find_one({'user_id': message.from_user.id})
     if token_data:
-        if token_data['expires_at'] > datetime.datetime.now(datetime.UTC):
+        if token_data['expires_at'] > datetime.datetime.utcnow():
             bot.reply_to(message, text=f"<b>Token is valid , you can get unlimited Movie/show links for 1 hour 😇</b>", parse_mode="html", disable_web_page_preview=True)
             return True
         else:
@@ -1020,9 +1047,21 @@ def genddl(taskid):
   }
 
   response = requests.post('https://new3.gdtot.dad/ajax.php', params=params, cookies=cookies, headers=headers, data=data)
+  print(response.text)
   url = response.json()['download']
   if 'http' in url:
-    print(url)
     return url
    
+   
+def gdfbypass(link):
+  post_body = {
+    "cmd": "request.get",
+    "url":f"{link}",
+    "maxTimeout": 120000
+  }
+  response = requests.post('https://flr-65c636259ed4.herokuapp.com/v1', headers={'Content-Type': 'application/json'}, json=post_body)
+  fsdata = json.loads(response.text)
+  soup = BeautifulSoup(fsdata['solution']['response'],'lxml')
+  return soup.find('a',{'class':'btn-success'})['href']
+  
 bot.infinity_polling(timeout=10, long_polling_timeout=5)
