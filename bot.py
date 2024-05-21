@@ -246,6 +246,7 @@ def start(message):
                  try:
                   bp_url = genddl(datafake['task_id'])
                   try:
+                   print(bp_url)
                    text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n🌎<code>Bypassed Link : </code>{bp_url}*⚡powered by* @GdtotLinkz"
                   except:
                    text = f"🎥\t*{data[0]['title']}*\n\n✂️ *size - {data[0]['size']}*\n\n🔗 {link}\n\n*⚡powered by* @GdtotLinkz"
