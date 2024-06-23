@@ -1017,7 +1017,7 @@ def generate_adlink(message):
   html = requests.get(f"https://publicearn.com/api?api=a1bb968c95a6bbe5b9ad636986ad36dc5276bbdb&url=https://t.me/DriveMovie_bot?start={generate_short_token(message)}")
   linker = json.loads(html.text)['shortenedUrl']
   html = requests.get(linker)
-  return html.url
+  return linker
  
 def genddl(taskid):
   cookies = {
