@@ -427,6 +427,7 @@ def handle_all_messages(message):
                      "indexTitle":f"{new_title}"
                      }
                    links.insert_one(new_one)
+                   bot.reply_to(message, text=f"Added {url1} to DB , thank you !!", parse_mode="html", disable_web_page_preview=True)
                    id+=1
             elif 'gdtot' in i:
               url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new6.gdtot.cfd/file/',i.strip())
