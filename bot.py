@@ -29,11 +29,11 @@ client = MongoClient("mongodb+srv://notpointbreak:Password246M@cluster0.gzxc2sc.
 db = client.get_database('bifrost')
 links = db.gdtot
 
-client = MongoClient("mongodb+srv://yellowflash:Password246M?@cluster0.nzv7x2e.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+client = MongoClient("mongodb+srv://yellowflash:Password246M%3F@cluster0.nzv7x2e.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 db = client.get_database('bifrost')
 tokens_collection = db.token
 
-client = MongoClient("mongodb+srv://yellowflash:Password246M?@cluster0.nzv7x2e.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+client = MongoClient("mongodb+srv://yellowflash:Password246M%3F@cluster0.nzv7x2e.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 db = client.get_database('bifrost')
 ddlinks = db.bbg
 
