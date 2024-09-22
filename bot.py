@@ -431,7 +431,7 @@ def handle_all_messages(message):
                    id+=1
             elif 'gdtot' in i:
               url = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new6.gdtot.cfd/file/',i.strip())
-              url1 = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new4.gdtot.dad/file/',i.strip())
+              url1 = re.sub(r'https:\/\/[a-zA-Z1-90.]+\/file\/','https://new5.gdtot.dad/file/',i.strip())
               html = requests.get(f"{url1}",headers=headers)
               soup = BeautifulSoup(html.text,'lxml')
               title = soup.title.text[8::]
